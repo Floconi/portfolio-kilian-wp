@@ -1,3 +1,12 @@
+/*
+Theme Name: Portfolio Kilian 
+Theme URI: 
+Author: Kilian 
+Author URI: 
+Description: Ce thème 
+Version: 1.0
+*/
+
 /* Feuille de style css */
 /** 
 * * Extention utilisé :
@@ -95,7 +104,7 @@
 
 
 .header_hero{
-    background-image: url(../images/images_de_base/Fond_header.png);
+    background-image: url(../portfolio-kilian-wp/images/images_de_base/fond_header.png);
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -161,7 +170,7 @@ p{
     background-image: url();
 }
 .main{
-    background-image: url(../images/images_de_base/fond_main_.png);
+    background-image: url(../portfolio-kilian-wp/images/images_de_base/fond_main_.png);
     background-repeat: no-repeat;
     background-size: cover;
 }   
@@ -198,7 +207,7 @@ p{
 /** Partie citation */
 
 .citation{
-    background-image: url(../images/images_de_base/image_fond_citation.jpg);
+    background-image: url(../portfolio-kilian-wp/images/images_de_base/image_fond_citation.jpg);
     background-size: cover;
     background-position-y:bottom ;
 }
@@ -333,10 +342,12 @@ p{
 /* Position des labels */
 .label_etat_initial-custom{
     position: relative;
+    left : 10px;
+    bottom: -37px;
     z-index : 1;
     font-family: "nico_mojiregular"; 
-    transition: transform 350ms ease-in-out;
-    transform: translate( 10px , 37px);
+    /*transition: transform 350ms ease-in-out;
+    transform: translate( 10px , 37px);*/
     color : #fff;
 }
 
@@ -347,7 +358,6 @@ p{
 
 }
 .focus{
-    transform: scale(1);
     position: static;
 }
 .input_etat_initial-custom{

@@ -6,4 +6,6 @@ function register_my_menu(){
 }
 add_action( 'after_setup_theme', 'register_my_menu' );
 
-?>
+
+
+/** Ajouter un css */

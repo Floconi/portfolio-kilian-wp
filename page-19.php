@@ -1,112 +1,5 @@
-<!--
-    Page d'acceuil de mon porfolio
--->
-<!-- Extension utilisé :
-    - Better Comments 
-    - vscode-pdf (Afficher mon cv)
 
-    todo : 
- -->
-
- <!DOCTYPE html>
- <html lang="fr">
- <head>
-     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="author" content="Kilian Sochard" />
-     <meta name="description" content="Bienvenue sur mon portfolio" />
-     <meta name="copyright" content=" @ copyright | Kilian Sochard |Tous drois réservés" />
- 
-     <!--importation css dans cet ordre reset, bosstrap, icone boostrap , librarie boostrap et mon css-->
-     <link rel="stylesheet" href="css/resert.css" /> 
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css" integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" integrity="sha512-oAvZuuYVzkcTc2dH5z1ZJup5OmSQ000qlfRvuoTTiyTBjwX1faoyearj8KdMq0LgsBTHMrRuMek7s+CxF8yE+w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-     
-     <link rel="stylesheet" href="css/style.css" />
- 
-     <!--Police d'écriture -->
-     <!-- police 1: des boutons Silkscreen-regular  -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
-     
-     <!-- police 2: Les titres Paprika -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-     <link href="https://fonts.googleapis.com/css2?family=Paprika&family=Silkscreen&display=swap" rel="stylesheet">
-     <!-- Police 3 : nico_regular directement intégré par le css-->
-     
-     <!--JS de la page a-propos-->
-    <script src="js/script_a_propos.js" defer></script>
-    <title>A propos de moi</title>
-</head>
-<body>
-
-
-    
-    <section class="header_hero"> <!-- Obliger car l'arrière plan doit être sur le header et le héro-->
-        <header class="header">
-            <div class="container d-flex justify-content-between">
-                <div class="row ">
-                    <div class="col-12">
-                        <ul>
-                            <li class="logos">
-                                <img  class="logo" src="images/logo.svg" alt="logo">
-                            </li>
-                        </ul>
-                          
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col-12 ">
-                        <nav class="nav d-block d-sm-none">
-                            <ul>
-                                <li class="d-block d-sm-none">
-                                    <i class="bi bi-bookmark-star icone_menu"></i>
-                                </li>
-                            </ul> 
-                            <div class="menu_cacher d-none"></div> 
-                        </nav>
-                        <nav class="nav d-none d-sm-block">
-                            <ul>
-                                <li>
-                                    <a  href="index.html">Acceuil</a>
-                                </li>
-                                <li>
-                                    <a class="page_active" href="a-propos.html">A propos</a>
-                                </li>
-                                <li>
-                                    <a  href="contact.html">Contact</a>
-                                </li>
-                            </ul> 
-                        </nav>
-                    </div> 
-                </div>
-                </div>
-            </div>
-        </header>
-        <section class="hero">
-            <div class="container">
-                <div class="row ">
-                    <div class="col-12 d-flex flex-column justify-content-center text-center align-items-center content-hero-custom">
-                        <h1>A propos de moi_ 
-                            <br>
-                            <span>
-                                Kilian Sochard 
-                                <br>
-                                Développeur web
-                            </span>
-                        </h1>
-                        <div class="btn_hero">
-                            <a href="#profil"><button class=" btn btn-primary bouton_header-custom btn_perso">En savoir plus</button></a>
-                        </div>
-                    </div>   
-                </div>
-            </div>
-        </section>
-    </section>
-
+    <?php get_header() ?>
     <main class="main">
         <section class="profil main_section" id="profil">
             <div class="container">
@@ -119,7 +12,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 mt-2 mb-2 col-md-1 order-md-3  d-flex justify-content-center div_image_profil">
-                        <img class="image_profil" src="images/Avatar_kilian_S.png" alt="ma photo de profil">
+                        <img class="image_profil" src="<?php echo bloginfo('template_directory')."/images/Avatar_kilian_S.png"?>" alt="ma photo de profil">
                     </div>
                     <div class="col-12 col-sm-8 mt-2 mb-2 col-md-8 order-md-2 d-flex">
                         <p class="description_custom">
@@ -174,7 +67,7 @@
                     <div class="col-6 col-md-4">
                         <div class="competences_zone_titre ">
                         <h3 class="titre_h3 ">Algoritme</h3>
-                        <img class="competences_image_custom" src="images/images_de_base/image_code.jpg" alt="image du pseudo code">
+                        <img class="competences_image_custom" src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_code.jpg"?>" alt="image du pseudo code">
                         </div>
                         <div class="competence_liste">
                             <ul>
@@ -189,8 +82,8 @@
                     <div class="col-6 col-md-4">
                         <div class="competences_zone_titre ">
                             <h3 class="titre_h3">Html et css</h3>
-                            <img class="competences_image_custom" src="images/images_de_base/logo html css.png" alt="image du pseudo code">
-                            <img class="competences_image_custom" src="images/images_de_base/icones_css.png" alt="image du pseudo code">
+                            <img class="competences_image_custom" src="<?php echo bloginfo('template_directory')."/images/images_de_base/logo html css.png"?>" alt="image du pseudo code">
+                            <img class="competences_image_custom" src="<?php echo bloginfo('template_directory')."/images/images_de_base/icones_css.png"?>" alt="image du pseudo code">
                         </div>
                         <div class="competence_liste ">
                             <ul>
@@ -208,7 +101,7 @@
                     <div class="col-6 col-md-4 ">
                         <div class="competences_zone_titre">
                             <h3 class="titre_h3">JavaScript</h3>
-                            <img class="competences_image_custom" src="images/images_de_base/icones_js.png" alt="image du pseudo code"> 
+                            <img class="competences_image_custom" src="<?php echo bloginfo('template_directory')."/images/images_de_base/icones_js.png"?>" alt="image du pseudo code"> 
                         </div>
                         <ul>
                             <li>afficher dans le dom avec javascript</li>
@@ -234,7 +127,7 @@
                 <div class="row">
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_carte_memory.jpg" class="card-img-top image-carte-custom" alt="image memory">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_memory.jpg"?>" class="card-img-top image-carte-custom" alt="image memory">
                             <div class="card-body">
                             <h5 class="card-title">Project memory</h5>
                             <p class="card-text">faire un jeu de memory où  le but est de trouver toutes les paires</p>
@@ -245,7 +138,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/image_convertiseur.png" class="card-img-top" alt="image convertiseur">
+                            <img src="<?php echo bloginfo('template_directory')."/images/image_convertiseur.png"?>" class="card-img-top" alt="image convertiseur">
                             <div class="card-body">
                             <h5 class="card-title">Project convertisseur</h5>
                             <p class="card-text">Programme qui converti  une somme d'euros en franc ou inversement</p>
@@ -256,7 +149,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_carte_morpion.png" class="card-img-top" alt="image morpion">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_morpion.png"?>" class="card-img-top" alt="image morpion">
                             <div class="card-body">
                             <h5 class="card-title">Project morpion</h5>
                             <p class="card-text">Le but du jeu  est d'aligner 3 symbole dans n'importe quel sens</p>
@@ -267,7 +160,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_carte_style_.png" class="card-img-top" alt="image style guide">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_style_.png"?>" class="card-img-top" alt="image style guide">
                             <div class="card-body">
                             <h5 class="card-title">style sous figma</h5>
                             <p class="card-text">Un style guide d'un cv pour une futur intégration</p>
@@ -278,7 +171,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_couverture_biographie.png" class="card-img-top" alt="image one page">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_couverture_biographie.png"?>" class="card-img-top" alt="image one page">
                             <div class="card-body">
                             <h5 class="card-title">One Page Biographie</h5>
                             <p class="card-text">Création d'une biographie de l'auteur Victor Hugo</p>
@@ -289,7 +182,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_card_scratch.png" class="card-img-top" alt="image Scratch">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_card_scratch.png"?>" class="card-img-top" alt="image Scratch">
                             <div class="card-body">
                             <h5 class="card-title">Projet Scratch</h5>
                             <p class="card-text">Petite histoire de Noël sous scratch ( stop motion)</p>
@@ -332,7 +225,7 @@
                                 <li class="rouge">De juillet 2018 à août 2021 </li>
                                 <li>Comité d'entreprise Sncf Centres de vacances pour enfants (Samoëns, Argentière, Belle-lle, Nevers). Service, ménage, blanchisserie et aide cuisine.</li>
                             </ul>
-                            <img class="image_fin_carte" src="images/images_de_base/image_travail.jpg" alt="image de travail">
+                            <img class="image_fin_carte" src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_travail.jpg"?>" alt="image de travail">
                         </div>
 
                     </div>
@@ -367,7 +260,7 @@
                             <ul>
                                 <li>Randonnée</li>
                             </ul>
-                            <img class="image_fin_carte " src="images/images_de_base/image_course_d_orientation.jpg" alt="image de travail">
+                            <img class="image_fin_carte " src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_course_d_orientation.jpg"?>" alt="image de travail">
                         </div>
 
                     </div>
@@ -379,19 +272,5 @@
     </main>
    
 
-
-    <footer class="footer ">
-        <div class="container">
-         <div class="row d-flex align-items-center">
-             <div class="col-2">
-                 <img src="images/image_merci-removebg-preview.png" alt="image de remerciment">
-             </div>
-             <div class="col-7">
-                 <p> @ copyright | Kilian Sochard |Tous drois réservés </p>
-             </div>
-             <div class="col-3 ">
-                <a href="https://fr.linkedin.com/"><i class="bi bi-linkedin icon-custom"></i></a>
-                <a href="https://github.com/Floconi?tab=repositories"><i class="bi bi-github icon-custom"></i></a>
-             </div>
-         </div>
-     </footer>
+    <?php get_footer() ?>
+   

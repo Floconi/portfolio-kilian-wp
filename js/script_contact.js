@@ -324,8 +324,85 @@ function verify_information(){
 
     /* Comme plusieurs erreur sont à détecter, je préfère tout effacer et partir
     du principe qu'il y est aucune erreur */
-    
+    console.log(erreur_champ_nom)
     nomb_erreur = 0 
+
+/* Récupérations des Labels */
+
+var label_nom = document.querySelector("#label_nom")
+var label_prenom = document.querySelector("#label_prenom")
+var label_email = document.querySelector("#label_email")
+var label_telephone = document.querySelector("#label_telephone")
+var label_message = document.querySelector("#label_message")
+
+/* Récupérations des champs */
+
+var champ_nom = document.querySelector("#champ_nom")
+var champ_prenom  = document.querySelector("#champ_prenom")
+var champ_email = document.querySelector("#champ_email")
+var champ_telephone = document.querySelector("#champ_telephone")
+var champ_message = document.querySelector("#champ_message")
+
+/* Récupérations des erreurs champs */
+
+var erreur_champ_nom = document.querySelector(".nom-error")
+var erreur_champ_prenom  = document.querySelector(".prenom-error")
+var erreur_champ_email = document.querySelector(".email-error")
+var erreur_champ_telephone = document.querySelector(".tel-error")
+var erreur_champ_message = document.querySelector(".message-error")
+
+/* Indique à l'utilisateur le nombre de caractère minimum à saisir */
+
+var nombre_caractere_minimum_nom = document.querySelector(".nomb_carac_minimum_nom")
+var nombre_caractere_minimum_prenom = document.querySelector(".nomb_carac_minimum_prenom")
+var nombre_caractere_minimum_email = document.querySelector(".nomb_carac_minimum_email")
+var nombre_caractere_minimum_telephone = document.querySelector(".nomb_carac_minimum_telephone")
+var nombre_caractere_minimum_message = document.querySelector(".nomb_carac_minimum_message")
+
+/* Indique à l'utilisateur le nombre de caractère tapé dans un champs spécifique */
+
+var nombre_caractere_nom = document.querySelector(".nomb_carac_nom")
+var nombre_caractere_prenom = document.querySelector(".nomb_carac_prenom")
+var nombre_caractere_email = document.querySelector(".nomb_carac_email")
+var nombre_caractere_telephone = document.querySelector(".nomb_carac_telephone")
+var nombre_caractere_message = document.querySelector(".nomb_carac_message")
+
+/* Récupération du total des erreurs */
+var btn_envoyer = document.querySelector("#btn_contact")
+var erreurgenerale = document.querySelector(".erreur-generale")
+
+
+/** On définie ces contentes une fois  et après tout le code est affecter
+ *  TODO: Changer ses var en const car pas vraiment besoin de variables
+*/
+
+var requis_nom = true;
+var requis_prenom = true;
+var requis_email = true;
+var requis_telephone = false;
+var requis_message = true;
+
+var nomb_carac_min = 0;
+
+var nomb_carac_min_nom = 3; 
+var nomb_carac_min_prenom = 3;
+var nomb_carac_min_email = 10; /* un email doit contenir le domaine et un @*/
+var nomb_carac_min_telephone = 10; 
+var nomb_carac_min_message = 50; /* Je ne veux pas des message trop petit après avec les formule de politesse normalement c bon */
+
+var nomb_carac_max = 0;
+
+var nomb_carac_max_nom = 50; 
+var nomb_carac_max_prenom = 50;
+var nomb_carac_max_email = 100; /* Au cas ou l'adresse mail est longue*/
+var nomb_carac_max_telephone = 15; /* Certains numéro peuvent contenir 15 caractères */
+var nomb_carac_max_message = 2000;
+
+/* Variables des programes */
+
+var erreur_totale = false /* je crois que cette variable est plus néssésaire mais avant si car je n'avais pas le nombre d'erreur */
+var nomb_erreur = 0 /* Compte le nombre d'erreur */
+var erreur_minimum = false 
 
     effacerErreur(erreur_champ_nom)
     effacerErreur(erreur_champ_prenom)
@@ -337,12 +414,28 @@ function verify_information(){
     /* Verification Nom */
 
     var etat_du_champ = saisie_obligatoire(champ_nom,erreur_champ_nom)
+    
     if( etat_du_champ != true){ /* J'ai désider de ne pas afficher les autres erreur si la personne n'a pas rempli le champ (Pour expérience utilisateur) */
-        caractere_interdit(champ_nom,erreur_champ_nom)
-        presence_lettre(champ_nom,erreur_champ_nom)
-        nomb_caractère_mininum(champ_nom,erreur_champ_nom,nomb_carac_min_nom,requis_nom)
-        nomb_caractère_maximum(champ_nom,erreur_champ_nom,nomb_carac_max_nom)
+        etat_du_champ = caractere_interdit(champ_nom,erreur_champ_nom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }   
+        etat_du_champ = presence_lettre(champ_nom,erreur_champ_nom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        } 
 
+        etat_du_champ = nomb_caractère_mininum(champ_nom,erreur_champ_nom,nomb_carac_min_nom,requis_nom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        } 
+        etat_du_champ = nomb_caractère_maximum(champ_nom,erreur_champ_nom,nomb_carac_max_nom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        } 
+
+    }else{
+        nomb_erreur = nomb_erreur+1
     }
 
     /* Vérification Prénom */
@@ -350,39 +443,96 @@ function verify_information(){
     etat_du_champ = saisie_obligatoire(champ_prenom,erreur_champ_prenom)
 
     if( etat_du_champ != true){
-        caractere_interdit(champ_prenom,erreur_champ_prenom)
-        presence_lettre(champ_prenom,erreur_champ_prenom)
-        nomb_caractère_mininum(champ_prenom,erreur_champ_prenom,nomb_carac_min_prenom,requis_prenom)
-        nomb_caractère_maximum(champ_prenom,erreur_champ_prenom,nomb_carac_max_prenom)
+        etat_du_champ = caractere_interdit(champ_prenom,erreur_champ_prenom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        } 
+        etat_du_champ = presence_lettre(champ_prenom,erreur_champ_prenom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        } 
+        etat_du_champ = nomb_caractère_mininum(champ_prenom,erreur_champ_prenom,nomb_carac_min_prenom,requis_prenom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        } 
+        etat_du_champ = nomb_caractère_maximum(champ_prenom,erreur_champ_prenom,nomb_carac_max_prenom)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+    }else{
+        nomb_erreur = nomb_erreur+1
+    }
+
+
+
+    /* Vérification Email */
+
+    etat_du_champ = saisie_obligatoire(champ_email,erreur_champ_email)
+        
+    if( etat_du_champ != true){
+        etat_du_champ = caractere_interdit(champ_email,erreur_champ_email)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+        etat_du_champ = verifier_presence_caractere(champ_email,erreur_champ_email,"@")
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+        etat_du_champ = verifier_presence_caractere(champ_email,erreur_champ_email,".")
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+        etat_du_champ = nomb_caractère_mininum(champ_email,erreur_champ_email,nomb_carac_min_email,requis_email)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+        etat_du_champ = nomb_caractère_maximum(champ_email,erreur_champ_email,nomb_carac_max_email)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+    }else{
+        nomb_erreur = nomb_erreur+1
     }
 
     /* Vérification Tel */
 
-    caractere_interdit(champ_telephone,erreur_champ_telephone) /* Par principe mais inutile puisque on vérifie uniquement des chiffres donc pas de caractere interdit */ 
-    verifier_saisie_chiffre(champ_telephone,erreur_champ_telephone)
-    nomb_caractère_mininum(champ_telephone,erreur_champ_telephone,nomb_carac_min_telephone,requis_telephone)
-    nomb_caractère_maximum(champ_telephone,erreur_champ_telephone,nomb_carac_max_telephone)
-    
-    /* Vérification Email */
-
-    etat_du_champ = saisie_obligatoire(champ_email,erreur_champ_email)
-    
-    if( etat_du_champ != true){
-        caractere_interdit(champ_email,erreur_champ_email)
-        verifier_presence_caractere(champ_email,erreur_champ_email,"@")
-        verifier_presence_caractere(champ_email,erreur_champ_email,".")
-        nomb_caractère_mininum(champ_email,erreur_champ_email,nomb_carac_min_email,requis_email)
-        nomb_caractère_maximum(champ_email,erreur_champ_email,nomb_carac_max_email)
+    etat_du_champ = caractere_interdit(champ_telephone,erreur_champ_telephone) /* Par principe mais inutile puisque on vérifie uniquement des chiffres donc pas de caractere interdit */ 
+    if( etat_du_champ == true){
+        nomb_erreur = nomb_erreur+1
     }
+    etat_du_champ = verifier_saisie_chiffre(champ_telephone,erreur_champ_telephone)
+    if( etat_du_champ == true){
+        nomb_erreur = nomb_erreur+1
+    }
+    etat_du_champ = nomb_caractère_mininum(champ_telephone,erreur_champ_telephone,nomb_carac_min_telephone,requis_telephone)
+    if( etat_du_champ == true){
+        nomb_erreur = nomb_erreur+1
+    }
+    etat_du_champ = nomb_caractère_maximum(champ_telephone,erreur_champ_telephone,nomb_carac_max_telephone)
+    if( etat_du_champ == true){
+        nomb_erreur = nomb_erreur+1
+    }
+    
 
     /* Vérification message */
    
     etat_du_champ =saisie_obligatoire(champ_message,erreur_champ_message)
 
     if( etat_du_champ != true){
-        caractere_interdit(champ_message,erreur_champ_message)
-        nomb_caractère_mininum(champ_message,erreur_champ_message,nomb_carac_min_message,requis_message)
-        nomb_caractère_maximum(champ_prenom,erreur_champ_prenom,nomb_carac_max_message)
+        etat_du_champ = caractere_interdit(champ_message,erreur_champ_message)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+        etat_du_champ = nomb_caractère_mininum(champ_message,erreur_champ_message,nomb_carac_min_message,requis_message)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+        etat_du_champ = nomb_caractère_maximum(champ_prenom,erreur_champ_prenom,nomb_carac_max_message)
+        if( etat_du_champ == true){
+            nomb_erreur = nomb_erreur+1
+        }
+    }else{
+        nomb_erreur = nomb_erreur+1
     }
     
     /* Cette partie est importente ! Elle définie le nombre d'erreur restante et surtout elle 
@@ -407,8 +557,8 @@ function verify_information(){
  * @param {*} erreur_champ prends le bloc erreurs
  */
 function effacerErreur(erreur_champ){
-    erreur_champ.innerHTML=""
-    erreur_champ.style.display = "none"
+    erreur_champ.innerHTML = "";
+    erreur_champ.style.display = "none";
 }    
 
 /**
@@ -464,10 +614,8 @@ function caractere_interdit(champ,erreur_champ){
     if (erreur_interdit == true) {
         nomb_erreur = nomb_erreur + 1 
     }
-    
 
-
-
+    return erreur_interdit
 
 }
 
@@ -503,6 +651,8 @@ function presence_lettre(champ,erreur_champ){
     if (erreur_lettre == true) {
         nomb_erreur = nomb_erreur + 1 
     }
+
+    return erreur_lettre
     
 }
 /**
@@ -511,6 +661,7 @@ function presence_lettre(champ,erreur_champ){
  * @param {*} erreur_champ permet d'indiquer si il y a une erreur
  */
 function verifier_saisie_chiffre(champ, erreur_champ){
+    var erreur_chiffre = false
     if(isNaN(champ.value) == true){
         
         if (erreur_champ.textContent == ""){
@@ -522,9 +673,10 @@ function verifier_saisie_chiffre(champ, erreur_champ){
         erreur_champ.classList.add("alert-danger")
         erreur_champ.style.display = "block"; 
         erreur_totale = true
+        erreur_chiffre = true
         nomb_erreur = nomb_erreur + 1 
     }
-
+    return erreur_chiffre
 
 }
 
@@ -535,6 +687,7 @@ function verifier_saisie_chiffre(champ, erreur_champ){
  * @param {*} caractère le caractère à vouloir inclure dans le champs
  */
 function verifier_presence_caractere(champ,erreur_champ,caractère){
+    var erreur_caractere = false
     if( champ.value.includes(caractère) == false){
         if (erreur_champ.textContent == ""){
              erreur_champ.innerHTML = "Le champ "+champ.name+" doit contenir le caractère suivant : \""+caractère+"\" ."
@@ -545,8 +698,10 @@ function verifier_presence_caractere(champ,erreur_champ,caractère){
             erreur_champ.classList.add("alert-danger")
             erreur_champ.style.display = "block"; 
             erreur_totale = true
+            erreur_caractere = true
             nomb_erreur = nomb_erreur + 1 
     }
+    return erreur_caractere
 }
 
 /**
@@ -557,7 +712,7 @@ function verifier_presence_caractere(champ,erreur_champ,caractère){
  * @param {*} requis indique si le champ est obligatoire
  */
 function nomb_caractère_mininum(champ, erreur_champ, nomb_min_carac, requis){
-    
+    var erreur_minimum = false
     if(requis == true){
         if(champ.value.length < nomb_min_carac){
             if (erreur_champ.textContent == ""){
@@ -569,6 +724,7 @@ function nomb_caractère_mininum(champ, erreur_champ, nomb_min_carac, requis){
             erreur_champ.classList.add("alert-danger")
             erreur_champ.style.display = "block"; 
             erreur_totale = true
+            erreur_minimum = true
             nomb_erreur = nomb_erreur + 1 
         }
     }else{
@@ -582,11 +738,12 @@ function nomb_caractère_mininum(champ, erreur_champ, nomb_min_carac, requis){
             erreur_champ.classList.add("alert-danger")
             erreur_champ.style.display = "block"; 
             erreur_totale = true
+            erreur_minimum = true
             nomb_erreur = nomb_erreur + 1 
         }
     }
 
-
+    return erreur_minimum
 }
 
 /**
@@ -597,7 +754,7 @@ function nomb_caractère_mininum(champ, erreur_champ, nomb_min_carac, requis){
  * @param {*} requis indique si le champ est obligatoire
  */
 function nomb_caractère_maximum(champ, erreur_champ, nomb_max_carac){
-    
+        var erreur_maximum = false
         if(champ.value.length > nomb_max_carac){
             if (erreur_champ.textContent == ""){
                 erreur_champ.innerHTML = "Le champ "+champ.name+" ne doit pas contenir plus de "+nomb_max_carac+" caractères"
@@ -608,8 +765,10 @@ function nomb_caractère_maximum(champ, erreur_champ, nomb_max_carac){
             erreur_champ.classList.add("alert-danger")
             erreur_champ.style.display = "block"; 
             erreur_totale = true
+            erreur_maximum = true
             nomb_erreur = nomb_erreur + 1 
         } 
+        return erreur_maximum
 }
 
 
@@ -625,6 +784,12 @@ function nomb_caractère_maximum(champ, erreur_champ, nomb_max_carac){
 */
 function trouver_champ(nom_du_champ){
     var champ
+
+    var champ_nom = document.querySelector("#champ_nom")
+    var champ_prenom  = document.querySelector("#champ_prenom")
+    var champ_email = document.querySelector("#champ_email")
+    var champ_telephone = document.querySelector("#champ_telephone")
+    var champ_message = document.querySelector("#champ_message")
     if (nom_du_champ == "nom"){
         champ = champ_nom
     }
@@ -645,12 +810,50 @@ function trouver_champ(nom_du_champ){
 }
 
 /**
+ **Fonction qui permet de trouver le champ cliquer par l'utilisateur à partir de son nom
+ * @param {*} nom_du_champ Le nom du champ
+ * @returns l'element champ assosié au champ cliquer par l'utilisateur
+*/
+function trouver_champ_nomb_carac_minimum(nom_du_champ){
+    var champ
+    var nombre_caractere_minimum_nom = document.querySelector(".nomb_carac_minimum_nom")
+    var nombre_caractere_minimum_prenom = document.querySelector(".nomb_carac_minimum_prenom")
+    var nombre_caractere_minimum_email = document.querySelector(".nomb_carac_minimum_email")
+    var nombre_caractere_minimum_telephone = document.querySelector(".nomb_carac_minimum_telephone")
+    var nombre_caractere_minimum_message = document.querySelector(".nomb_carac_minimum_message")
+
+    if (nom_du_champ == "nom"){
+        champ = nombre_caractere_minimum_nom
+    }
+    if (nom_du_champ == "prenom"){
+        champ = nombre_caractere_minimum_prenom
+    }
+    if (nom_du_champ == "email"){
+        champ = nombre_caractere_minimum_email
+    }
+    if (nom_du_champ == "telephone"){
+        champ = nombre_caractere_minimum_telephone
+    }
+    if (nom_du_champ == "message"){
+        champ = nombre_caractere_minimum_message
+    }
+    return champ
+
+}
+
+/**
  **Fonction qui permet de trouver l'élément label à partir de son nom
  * @param {*} nom_du_champ son nom
  * @returns le label assosié au champ cliquer par l'utilisateur
 */
 function trouver_label(nom_du_champ){
-    var label
+    var label   
+    var label_nom = document.querySelector("#label_nom")
+    var label_prenom = document.querySelector("#label_prenom")
+    var label_email = document.querySelector("#label_email")
+    var label_telephone = document.querySelector("#label_telephone")
+    var label_message = document.querySelector("#label_message")
+    
     if (nom_du_champ == "nom"){
         label = label_nom
     }
@@ -678,6 +881,28 @@ function trouver_label(nom_du_champ){
 
 function trouver_champ_nomb_carac(nom_du_champ){
     var champ
+    var nomb_carac_min = 0;
+
+    var nomb_carac_min_nom = 3; 
+    var nomb_carac_min_prenom = 3;
+    var nomb_carac_min_email = 10; /* un email doit contenir le domaine et un @*/
+    var nomb_carac_min_telephone = 10; 
+    var nomb_carac_min_message = 50; /* Je ne veux pas des message trop petit après avec les formule de politesse normalement c bon */
+
+    var nomb_carac_max = 0;
+
+    var nomb_carac_max_nom = 50; 
+    var nomb_carac_max_prenom = 50;
+    var nomb_carac_max_email = 100; /* Au cas ou l'adresse mail est longue*/
+    var nomb_carac_max_telephone = 15; /* Certains numéro peuvent contenir 15 caractères */
+    var nomb_carac_max_message = 2000;
+
+    var nombre_caractere_nom = document.querySelector(".nomb_carac_nom")
+    var nombre_caractere_prenom = document.querySelector(".nomb_carac_prenom")
+    var nombre_caractere_email = document.querySelector(".nomb_carac_email")
+    var nombre_caractere_telephone = document.querySelector(".nomb_carac_telephone")
+    var nombre_caractere_message = document.querySelector(".nomb_carac_message")
+
     if (nom_du_champ == "nom"){
         champ = nombre_caractere_nom
         nomb_carac_min = nomb_carac_min_nom
@@ -709,40 +934,79 @@ function trouver_champ_nomb_carac(nom_du_champ){
 }
 
 /**
+ **Fonction qui permet de trouver l'éléement nombre de caractère cliquer par l'utilisateur à partir de son nom
+ * @param {*} nom_du_champ Le nom du champ
+ * @returns l'element nombre de caractère assosié au champ cliquer par l'utilisateur
+*/
+
+function trouver__nomb_carac_max(nom_du_champ){
+    var champ
+    
+
+    
+    var nomb_carac_max = 0;
+
+    var nomb_carac_max_nom = 50; 
+    var nomb_carac_max_prenom = 50;
+    var nomb_carac_max_email = 100; /* Au cas ou l'adresse mail est longue*/
+    var nomb_carac_max_telephone = 15; /* Certains numéro peuvent contenir 15 caractères */
+    var nomb_carac_max_message = 2000;
+
+
+    if (nom_du_champ == "nom"){
+        nomb_carac_max = nomb_carac_max_nom
+        
+    }
+    if (nom_du_champ == "prenom"){
+        nomb_carac_max = nomb_carac_max_prenom
+    }
+    if (nom_du_champ == "email"){
+        nomb_carac_max = nomb_carac_max_email
+    }
+    if (nom_du_champ == "telephone"){
+        nomb_carac_max = nomb_carac_max_telephone
+    }
+    if (nom_du_champ == "message"){
+        nomb_carac_max = nomb_carac_max_message
+    }
+    return nomb_carac_max
+
+}
+
+
+
+/**
  **Fonction qui permet de trouver l'élement nombre de caractère minimum cliquer par l'utilisateur à partir de son nom
  * @param {*} nom_du_champ Le nom du champ
  * @returns l'element nombre de caractère assosié au champ cliquer par l'utilisateur
 */
 
-function trouver_champ_nomb_carac_minimum(nom_du_champ){
-    var champ
+function trouver_nomb_carac_minimum(nom_du_champ){
+    var nomb_carac_min
+    var nomb_carac_min_nom = 3; 
+    var nomb_carac_min_prenom = 3;
+    var nomb_carac_min_email = 10; /* un email doit contenir le domaine et un @*/
+    var nomb_carac_min_telephone = 10; 
+    var nomb_carac_min_message = 50; 
+
+   
     if (nom_du_champ == "nom"){
-        champ = nombre_caractere_minimum_nom
         nomb_carac_min = nomb_carac_min_nom
-        nomb_carac_max = nomb_carac_max_nom
         
     }
     if (nom_du_champ == "prenom"){
-        champ = nombre_caractere_minimum_prenom
         nomb_carac_min = nomb_carac_min_prenom
-        nomb_carac_max = nomb_carac_max_prenom
     }
     if (nom_du_champ == "email"){
-        champ = nombre_caractere_minimum_email
         nomb_carac_min = nomb_carac_min_email
-        nomb_carac_max = nomb_carac_max_email
     }
     if (nom_du_champ == "telephone"){
-        champ = nombre_caractere_minimum_telephone
         nomb_carac_min = nomb_carac_min_telephone
-        nomb_carac_max = nomb_carac_max_telephone
     }
     if (nom_du_champ == "message"){
-        champ = nombre_caractere_minimum_message
         nomb_carac_min = nomb_carac_min_message
-        nomb_carac_max = nomb_carac_max_message
     }
-    return champ
+    return nomb_carac_min
 
 }
 
@@ -756,6 +1020,8 @@ function trouver_champ_nomb_carac_minimum(nom_du_champ){
  * @param {*} nom_du_champ nom du champ cliquer par l'utilisateur
  */
 function gestion_label_click(nom_du_champ) {
+ 
+
 
     var champ_cliquer = trouver_champ(nom_du_champ)
     var label_cliquer = trouver_label(nom_du_champ)
@@ -788,8 +1054,10 @@ function gestion_label_onchange(nom_du_champ) {
  */
 
 function afficher_nomb_caractere(nom_du_champ){
+    console.log("afficher nomb carac")
     var champ_cliquer = trouver_champ(nom_du_champ)
     var champ_cliquer_nomb_carac = trouver_champ_nomb_carac(nom_du_champ)
+    var nomb_carac_max = trouver__nomb_carac_max(nom_du_champ)
     champ_cliquer_nomb_carac.style.display = "flex"
     champ_cliquer_nomb_carac.classList.add("active");
     champ_cliquer_nomb_carac.classList.add("longeur_accept");
@@ -806,6 +1074,7 @@ function ecriture_nomb_caractère(nom_du_champ){
 
     var champ_cliquer = trouver_champ(nom_du_champ)
     var champ_cliquer_nomb_carac = trouver_champ_nomb_carac(nom_du_champ)
+    var nomb_carac_max = trouver__nomb_carac_max(nom_du_champ)
     champ_cliquer_nomb_carac.classList.remove("longeur_refuse", "longeur_limit")
     champ_cliquer_nomb_carac.innerHTML ="<div class=\"d-flex justify-content-end compter-carac\">"+champ_cliquer.value.length+" / "+nomb_carac_max+"</div>";
     champ_cliquer_nomb_carac.classList.add("active");
@@ -846,10 +1115,14 @@ function elever_nomb_caractere(nom_du_champ){
  */
 
 function ecriture_nomb_caractère_minimum(nom_du_champ){
-    console.log("hellossssss")
+
+   /* elever_nomb_caractere(nom_du_champ)*/
+
+
     var champ_cliquer = trouver_champ(nom_du_champ)
     var champ_cliquer_nomb_carac = trouver_champ_nomb_carac(nom_du_champ)
     var champ_cliquer_nomb_carac_miminum = trouver_champ_nomb_carac_minimum(nom_du_champ)
+    var nomb_carac_min = trouver_nomb_carac_minimum(nom_du_champ)
 
     if (champ_cliquer.value.length < nomb_carac_min && champ_cliquer.value.length != 0){
         champ_cliquer_nomb_carac_miminum.innerHTML = "<div class= \"message_caractere_minimum\"> nombre de caractère minmum : "+nomb_carac_min

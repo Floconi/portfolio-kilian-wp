@@ -31,7 +31,7 @@
                 </div>
                 <div class="row">
                     <div class="col-4  d-flex justify-content-center align-items-center">
-                        <img src="images/Avatar_kilian_S.png">
+                        <img src="<?php echo bloginfo('template_directory')."/images/Avatar_kilian_S.png"?>">
                     </div>
                     <div class="d-none d-md-block col-md-2"></div>
                     <div class="col-8 col-md-4">
@@ -47,6 +47,10 @@
                         <div class="d-none d-md-block col-md-2"></div>   
                     </div>
                 </div>
+
+
+
+            <p> 
                 
                         
                     
@@ -64,13 +68,13 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="images/Citation_1-removebg-preview.png" class="d-block w-100" alt="citation_1">
+                                <img src="<?php echo bloginfo('template_directory')."/images/Citation_1-removebg-preview.png"?>" class="d-block w-100" alt="citation_1">
                             </div>
                             <div class="carousel-item">
-                                <img src="images/Citation_2-removebg-preview.png" class="d-block w-100" alt="citation_2">
+                                <img src="<?php echo bloginfo('template_directory')."/images/Citation_2-removebg-preview.png"?>" class="d-block w-100" alt="citation_2">
                             </div>
                             <div class="carousel-item">
-                                <img src="images/Citation_3-removebg-preview.png" class="d-block w-100" alt="citation_3">
+                                <img src="<?php echo bloginfo('template_directory')."/images/Citation_3-removebg-preview.png"?>" class="d-block w-100" alt="citation_3">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -128,7 +132,7 @@
                 <div class="row">
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_carte_memory.jpg" class="card-img-top image-carte-custom" alt="image memory">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_memory.jpg"?>" class="card-img-top image-carte-custom" alt="image memory">
                             <div class="card-body">
                             <h5 class="card-title">Project memory</h5>
                             <p class="card-text">faire un jeu de memory où  le but est de trouver toutes les paires</p>
@@ -139,7 +143,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/image_convertiseur.png" class="card-img-top" alt="image convertiseur">
+                            <img src="<?php echo bloginfo('template_directory')."/images/image_convertiseur.png"?>" class="card-img-top" alt="image convertiseur">
                             <div class="card-body">
                             <h5 class="card-title">Project convertisseur</h5>
                             <p class="card-text">Programme qui converti  une somme d'euros en franc ou inversement</p>
@@ -150,7 +154,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_carte_morpion.png" class="card-img-top" alt="image morpion">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_morpion.png"?>" class="card-img-top" alt="image morpion">
                             <div class="card-body">
                             <h5 class="card-title">Project morpion</h5>
                             <p class="card-text">Le but du jeu  est d'aligner 3 symbole dans n'importe quel sens</p>
@@ -161,7 +165,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_carte_style_.png" class="card-img-top" alt="image style guide">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_style_.png"?>" class="card-img-top" alt="image style guide">
                             <div class="card-body">
                             <h5 class="card-title">style sous figma</h5>
                             <p class="card-text">Un style guide d'un cv pour une futur intégration</p>
@@ -172,7 +176,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_couverture_biographie.png" class="card-img-top" alt="image one page">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_couverture_biographie.png"?>" class="card-img-top" alt="image one page">
                             <div class="card-body">
                             <h5 class="card-title">One Page Biographie</h5>
                             <p class="card-text">Création d'une biographie de l'auteur Victor Hugo</p>
@@ -183,7 +187,7 @@
                     </div>
                     <div class="col-6 col-md-4">
                         <div class="card card-custom">
-                            <img src="images/images_de_base/image_card_scratch.png" class="card-img-top" alt="image Scratch">
+                            <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_card_scratch.png"?>" class="card-img-top" alt="image Scratch">
                             <div class="card-body">
                             <h5 class="card-title">Projet Scratch</h5>
                             <p class="card-text">Petite histoire de Noël sous scratch ( stop motion)</p>
