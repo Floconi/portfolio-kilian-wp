@@ -1,7 +1,7 @@
     <?php get_header() ?>
     <p class="icone_menu">
     <main class="main">
-        <section class="formulaire main_section" id="formulaire">
+        <section class="formulaire main_section" id="contact">
             <div class="container">
                 <div class="row">
                     <div class="col-3"></div>
@@ -16,7 +16,11 @@
                         Merci de renseigner dans votre message tous les détails possible pour répondre au mieux à votre demande.</p>
                     </div>
                 </div>
-                <div class="row  d-flex justify-content-center zone_formulaire">
+
+                <!-- /**
+                *!Formulaire fait par l'extansion sur contactform7
+                 */ -->
+                <!--<div class="row  d-flex justify-content-center zone_formulaire">
                     <div class="col-12">
                         <div class="row">
                             <div class="col-2 col-sm-1 col-md-1"></div>
@@ -110,7 +114,8 @@
                 </div>
             </div>
             
-        </section>
+        </section>-->
+        <?php the_content() ?>
     </main>
     
 

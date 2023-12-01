@@ -8,4 +8,5 @@ add_action( 'after_setup_theme', 'register_my_menu' );
 
 
 
-/** Ajouter un css */
+/** Ajouter un css */ 
+add_theme_support( 'post-thumbnails' );?>

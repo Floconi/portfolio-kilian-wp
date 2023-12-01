@@ -46,16 +46,18 @@
     <script <?php 
         $titre = get_the_title();
         $script ="";
+        $btn_header="" ;
         if($titre == "Accueil") {
 
+            $btn_header = "#about";
             $script = "/script_accueil.js";
 
         }elseif($titre == "A propos de moi"){
-
+            $btn_header = "#profil";
             $script = "/script_a_propos.js";
             
         }elseif($titre == "Contact"){
-
+            $btn_header = "#contact";
             $script = "/script_contact.js";
 
         }else{
@@ -96,10 +98,19 @@
                             <nav class="nav d-block d-sm-none">
                                 <ul>
                                     <li class="d-block d-sm-none">
-                                        <i class="bi bi-bookmark-star icone_menu"></i>
+                                        <a onclick="affichermenu()"><i class="bi bi-bookmark-star icone_menu"></i></a>
                                     </li>
                                 </ul> 
-                                <div class="menu_cacher d-none"></div> 
+                                <div class="menu_cacher d-none"> <nav id="site-navigation" class="main-navigation">
+                                    <?php
+                                    wp_nav_menu(
+                                        array(
+                                            'theme_location' => 'main-menu',
+                                            'menu_id'     => 'primary-menu',
+                                        )
+                                    );
+                                    ?>
+                                </nav> </div> 
                             </nav>
                             <nav class="nav d-none d-sm-block">
                                  <nav id="site-navigation" class="main-navigation">
@@ -135,11 +146,17 @@
                         <div class="col-12 d-flex flex-column justify-content-center text-center  align-items-center content-hero-custom">
                             <h1> <?php 
                             $titre = get_the_title();
-                            
+                            $post_type = get_post_type();
+
                             if ($titre == "Accueil"){
                                 echo "bienvenue_";
                             }else{
-                                echo $titre."_";
+                                if ( $post_type == "post"){
+                                    echo "Article : ".$titre."_";
+                                }else{
+                                   echo $titre."_";  
+                                }
+                               
                             } 
                             ?>
                                 <br>
@@ -150,7 +167,7 @@
                                 </span>
                             </h1>
                             <div class="btn_hero">
-                                <a href="#about"><button class=" btn btn-primary bouton_header-custom btn_perso">En savoir plus</button></a>
+                                <a href="<?php echo $btn_header ?>"><button class=" btn btn-primary bouton_header-custom btn_perso">En savoir plus</button></a>
                             </div>
                         </div>   
                     </div>

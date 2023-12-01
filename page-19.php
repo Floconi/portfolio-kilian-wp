@@ -17,7 +17,9 @@
                     <div class="col-12 col-sm-8 mt-2 mb-2 col-md-8 order-md-2 d-flex">
                         <p class="description_custom">
                             <!-- Je passe à la ligne pour + de lisibilité-->
-                            Après un bac scientifique (option culture numérique) et un DUT Génie Thermique et énergie, 
+                            <?php $descriptionprofil = get_page_by_title('Profil','','post');
+                                echo $descriptionprofil->post_content?>
+                             <!--Après un bac scientifique (option culture numérique) et un DUT Génie Thermique et énergie, 
                             je souhaite aujourd'hui me réorienter vers le domaine de l'informatique pour lequel j'ai toujours eu ungrand intérêt.
                             <br>
                             <br>
@@ -32,7 +34,7 @@
                             A titre personnel, je suis passionné par la programmation et j'ai pu concevoir des petits programmes de jeux sous excel (VBA) pendant mon temps libre.
                             <br>
                             <br>
-                            Sérieux, méthodique et rigoureux, je suis motivé et je compte m'investir pleinement pour réussir.
+                            Sérieux, méthodique et rigoureux, je suis motivé et je compte m'investir pleinement pour réussir. -->
                         </p>
                     </div>
                     <div class="col-12 col-sm-4 mt-2 mb-2 col-md-3 order-md-1 d-flex align-items-center justify-content-center  infosup m-0 mt-md-0">
@@ -64,9 +66,36 @@
                     <div class="col-3"></div>
                 </div>
                 <div class="row competences_contenu_custom pt-4 pb-4">
-                    <div class="col-6 col-md-4">
+                    <?php // 1. On définit les arguments pour définir ce que l'on souhaite récupérer
+                            $categorieCompetences = array(
+                                'category_name' => 'Compétences', 
+                                'orderby' => 'date',
+                                'order' => 'ASC',
+                               
+
+                            );
+
+                            // 2. On exécute la WP Query
+                            $article_compétences = new WP_Query( $categorieCompetences );
+
+                            // 3. On lance la boucle !
+                            if( $article_compétences->have_posts() ) : while( $article_compétences->have_posts() ) : $article_compétences->the_post();?>
+                            <div class="col-6 col-md-4">
                         <div class="competences_zone_titre ">
-                        <h3 class="titre_h3 ">Algoritme</h3>
+                            <h3 class="titre_h3 "> <?php echo $article_compétences->post->post_title ?></h3>
+                        <img class="competences_image_custom" src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_code.jpg"?>" alt="image du pseudo code">
+                        </div>
+                        <div class="competence_liste">
+                            <ul>
+                            <?php echo $article_compétences->post->post_content ?>
+                            </ul>
+                        </div> 
+                    </div>
+                    <?php endwhile; endif; ?>
+                
+                    <!--<div class="col-6 col-md-4">
+                        <div class="competences_zone_titre ">
+                            <h3 class="titre_h3 ">Algoritme</h3>
                         <img class="competences_image_custom" src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_code.jpg"?>" alt="image du pseudo code">
                         </div>
                         <div class="competence_liste">
@@ -105,14 +134,14 @@
                         </div>
                         <ul>
                             <li>afficher dans le dom avec javascript</li>
-                            <li>récupérer des données du dom et savoir les analyser.</li>
+                            <li>récupérer des données du dom et savoir les analyser</li>
                             <li>manipulation des formulaires</li>
                             <li>Contrôle de la saisie utilisateur</li>
                         </ul>
                     </div>
                     <div class="col-3 d-md-none"></div>
                 </div>
-            </div>    
+            </div>-->    
         </section>
 
         <section class="project main_section">
@@ -205,7 +234,9 @@
                     </div>
                     <div class="row row-custom">
                         <div class="col-12 col-md-12 d-block exp_pro__content ">
-                            <p class="exp_pro__intituler">Stage de découverte de conseiller informatique </p>
+                            <?php $ex_pro = get_page_by_title('Mes expériences professionnelles','','post');
+                                echo $ex_pro->post_content?>
+                            <!--<p class="exp_pro__intituler">Stage de découverte de conseiller informatique </p>
                             <ul>
                                 <li class="rouge">Juin 2023 Pôle numérique Gourdon </li>
                                 <li>Accueille des clients, les conseiller, répondre à leur interrogation concernant des problèmes liés à l'informatique. </li>
@@ -224,7 +255,7 @@
                             <ul>
                                 <li class="rouge">De juillet 2018 à août 2021 </li>
                                 <li>Comité d'entreprise Sncf Centres de vacances pour enfants (Samoëns, Argentière, Belle-lle, Nevers). Service, ménage, blanchisserie et aide cuisine.</li>
-                            </ul>
+                            </ul>-->
                             <img class="image_fin_carte" src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_travail.jpg"?>" alt="image de travail">
                         </div>
 
@@ -242,6 +273,8 @@
                     </div>
                     <div class="row row-custom">
                         <div class="col-12 col-md-12  hobies__content d-flex align-items-center flex-column justify-content-center">
+                            <?php $centreinteret = get_page_by_title('Centres d\'intérêt','','post');
+                                echo $centreinteret->post_content?>
                             <p class="hobies__intituler">Jeux de logique </p>
                             <ul>
                                 <li>Jeu d'échec à titre personnel </li>

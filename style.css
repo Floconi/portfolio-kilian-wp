@@ -91,6 +91,11 @@ Version: 1.0
     flex-direction: column !important;
     color: #fff;
 }
+.menu_deroulant ul{
+    display: block;
+    flex-direction: column !important;
+
+}
 .menu_deroulant a{
     text-decoration: none;
     color: #fff;
@@ -158,6 +163,19 @@ h1 span{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.project h5{
+    font-family: "Paprika";
+    font-size: 12px;
+    color: #FBB734;
+    text-decoration: underline;
+    text-align: center; 
+}
+.project p{
+    font-family: "monda";
+    font-size: 10px;
+    color: #fff;
 }
 
 p{
@@ -259,10 +277,24 @@ p{
 
     border-radius: 20px;
     margin-bottom: 10px;
+    padding-bottom: 50px;
 }
 .project .card-img-top{
-    height: 110px;
     border-radius: 20px;
+}
+.project img{
+    height: 200px;
+    border-radius: 20px;
+}
+.wp-block-image img{
+    height: 200px !important;
+    min-width: 100%;
+}
+.project p {
+    margin-top: 10px;
+}
+.red {
+    color: red;
 }
 
 /** Partie Contact */
