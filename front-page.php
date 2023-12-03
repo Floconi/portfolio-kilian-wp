@@ -17,17 +17,15 @@
     <?php get_header() ?>
 
 
-    <main class = "main">
+    <main class = "main" style="background-image: url(<?php echo bloginfo('template_directory')."/images/images_de_base/fond_main_.png)"?>">
         <section class=" main_section about" id="about">
             <div class="container">
                 <div class="row">
-                    <div class="col-3">
-                    </div>
+                    <div class="col-3"></div>
                     <div class="col-6">
                         <h2 class="p-4 titre_h2">Qui suis je ?_</h2>
                     </div>
-                    <div class="col-3">
-                    </div>
+                    <div class="col-3"></div>
                 </div>
                 <div class="row">
                     <div class="col-4  d-flex justify-content-center align-items-center">
@@ -37,8 +35,12 @@
                     <div class="col-8 col-md-4">
                         <div class="description_generale d-flex flex-column">
                             <p>
-                               <?php $descriptionAbout = get_page_by_title('Description','','post');
-                                echo $descriptionAbout->post_content?>
+                            <?php $categorieDescription_generale = array(
+                                'category_name' => 'Description_générale', 
+                            ); 
+                            $Description_generale = new WP_Query( $categorieDescription_generale );?>
+                               <?php // $descriptionAbout = get_page_by_title('Description','','post');?>
+                                <?php echo $Description_generale->post->post_content?>
                                 <!--Bonjour, Je suis Kilian montagnard dans l'ame, j' adore faire de la randonnée. 
                                 La nature est ma passion, je m'y retrouve et me resources. Souriant et bienvelllant, je suis toujours prêt pour de nouvelle rencontre. 
                                 J'ai réaliser un titre développeur web et web mobile. Je serais ravie de vous aider à réaliser vos projects. 
@@ -48,18 +50,12 @@
                         </div> 
                         <div class="d-none d-md-block col-md-2"></div>   
                     </div>
-                </div>
-
-
-
-            <p> 
-                
-                        
-                    
-                
+                </div>  
             </div>
         </section>
-        <section class=" citation main_section">
+
+
+        <section class=" citation main_section" style="background-image: url(<?php echo bloginfo('template_directory')."/images/images_de_base/image_fond_citation.png)"?>" >
             <div class="row carousel-custom">
                 <div class="col-8">
                     <div id="carouselExampleIndicators" class="carousel slide">
@@ -87,11 +83,9 @@
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
-                        </div>
+                    </div>
                 </div>
-            </div>
-
-             
+            </div> 
         </section>
        
 
@@ -124,109 +118,110 @@
             
 
 
-<section class="project main_section">
+        <section class="project main_section"> 
+            <?php // 1. On définit les arguments pour définir ce que l'on souhaite récupérer
+                    $categorieProject = array(
+                        "category_name" => "Projects", 
+                        "order" => "ASC"
+                    );
+
+                    // 2. On exécute la WP Query
+                    $article_project = new WP_Query( $categorieProject ); 
+                        // var_dump($article_project) ; ?>
+                         <?php //var_dump($article_project->query); ?>
+                        <?php // echo $article_project->query->category_name ?> <!-- Pourquoi cette ecriture ne marche pas ???-->
+                        <?php //echo $article_project->query["category_name"] ; ?>
             <div class="container">
                 <div class="row">
                     <div class="col-3 col-md-0"></div>
                     <div class="col-6  ">
-                        <h2 class=" titre_h2 p-4">Projects_</h2>
+                        <h2 class=" titre_h2 p-4"> <?php echo $article_project->query["category_name"] ; ?></h2>
                     </div>
                     <div class="col-3 col-md-0"></div>
                 </div>
                 <div class="row">
                     <?php
-                        //for ($i=1; $i<50; $i++) {
-                           // $nom_project = "Project-$i";
-                           // $post_project = get_page_by_title($nom_project,'','post');
-                        ?>
-                    
-                            
-                            <?php 
-                            //if ( $post_project == null){
-                            //}else{?>
-                                <!--<div class="col-6 col-md-4">
-                                    <div class="card card-custom"> 
-                                        <?php// $présence_image = get_post_thumbnail_id($post_project->ID);?>
-                                        <?php //if ($présence_image == 0 ){?> 
-                                            <img src="<?php //echo bloginfo('template_directory')."/images/image_project_de_base.jpeg"?>" >
-                                        <?php// } else { 
-                                           // $image = wp_get_attachment_image_src(get_post_thumbnail_id($post_project->ID));?>
-                                            <img src="<?php // echo $image[0] ?>" >
-                                        <?php /*if( (strpos($image[0],".png") == true) || (strpos($image[0],".jpg") == true) ){*/?>
-                                        <?php //} ?>
-                                        
-                                        <?php //if ( $post_project->post_excerpt == ""){?>
-                                            <p class="d-flex justify-content-center"><?php //$messageDefault = "[Veuillez renseigner un extrait de l'article]";?>
-                                                <?php //echo $messageDefault;
-                                            //}?>
-                                        <p><?php// echo $post_project->post_excerpt ?></p>
-                                       
-                                       <?php  //if ($post_project->post_content ==""){ ?>
-                                            <a onclick="" class="btn  btn_perso red mt-3">L'article est vide</a>
-                                        <?php //}else{?>
-                                        <a href="<?php // echo $post_project->guid ?>" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                                        <a href="https://github.com/Floconi/biographie_victor_hugo"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
-                                        <?php //} ?>  
-                                    </div>
-                                </div>-->
-                            <?php // } ?>
-                        <?php //} ?>
+                    //for ($i=1; $i<50; $i++) {
+                        // $nom_project = "Project-$i";
+                        // $post_project = get_page_by_title($nom_project,'','post');
+                    ?>
                         
-
-                            <?php // 1. On définit les arguments pour définir ce que l'on souhaite récupérer
-                            $categorieProject = array(
-                                'category_name' => 'Project', 
-                                'order' => ' DESC',
                                 
-                               
-
-                            );
-
-                            // 2. On exécute la WP Query
-                            $article_project = new WP_Query( $categorieProject );
-                            var_dump($article_project);
-
-                            // 3. On lance la boucle !
-                            if( $article_project->have_posts() ) : while( $article_project->have_posts() ) : $article_project->the_post();?>
+                    <?php 
+                    //if ( $post_project == null){
+                    //}else{?>
+                        <!--<div class="col-6 col-md-4">
+                            <div class="card card-custom"> 
+                                <?php// $présence_image = get_post_thumbnail_id($post_project->ID);?>
+                                <?php //if ($présence_image == 0 ){?> 
+                                    <img src="<?php //echo bloginfo('template_directory')."/images/image_project_de_base.jpeg"?>" >
+                                <?php// } else { 
+                                    // $image = wp_get_attachment_image_src(get_post_thumbnail_id($post_project->ID));?>
+                                    <img src="<?php // echo $image[0] ?>" >
+                                <?php // } ?>
+                                <?php /*if( (strpos($image[0],".png") == true) || (strpos($image[0],".jpg") == true) ){*/?>
+                                <?php //} ?>
+                                
+                                <?php //if ( $post_project->post_excerpt == ""){?>
+                                    <p class="d-flex justify-content-center"><?php //$messageDefault = "[Veuillez renseigner un extrait de l'article]";?>
+                                        <?php //echo $messageDefault;
+                                    //}?>
+                                <p><?php// echo $post_project->post_excerpt ?></p>
+                                
+                                <?php  //if ($post_project->post_content ==""){ ?>
+                                    <a onclick="" class="btn  btn_perso red mt-3">L'article est vide</a>
+                                <?php //}else{?>
+                                <a href="<?php // echo $post_project->guid ?>" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                <a href="https://github.com/Floconi/biographie_victor_hugo"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <?php //} ?>  
+                            </div>
+                        </div>-->
+                    <?php //} ?>
                             
+                   
 
-                                    <div class="col-6 col-md-4">
-                                        <div class="card card-custom"> 
-                                            <?php $présence_image = get_post_thumbnail_id($article_project->ID);?>
-                                            <?php if ($présence_image == 0 ){?> 
-                                                <img src="<?php echo bloginfo('template_directory')."/images/image_project_de_base.jpeg"?>" >
-                                            <?php } else { 
-                                                $image = wp_get_attachment_image_src(get_post_thumbnail_id($article_project->ID));?>
-                                                <img src="<?php echo $image[0] ?>" >
-                                            <?php /*if( (strpos($image[0],".png") == true) || (strpos($image[0],".jpg") == true) ){*/?>
-                                            <?php } ?>
-
-                                            <h5><?php echo  $article_project->post->post_title ?></h5>
-                                            <?php if ( $article_project->post->post_excerpt == ""){?>
-                                                <p class="d-flex justify-content-center"><?php $messageDefault = "[Veuillez renseigner un extrait de l'article]";?>
-                                                    <?php echo $messageDefault;
-                                                }?>
-                                            <p><?php echo $article_project->post->post_excerpt ?></p>
-                                        
-                                        <?php  if ($article_project->post->post_content ==""){ ?>
-                                                <a onclick="" class="btn  btn_perso red mt-3">L'article est vide</a>
-                                            <?php }else{?>
-                                            <a href="<?php echo $article_project->post->guid ?>" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                                            <a href="https://github.com/Floconi/biographie_victor_hugo"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
-                                            <?php } ?>  
-                                        </div>
-                                    </div>
-                                 
-                          <?php  endwhile; 
-                        endif; ?>
-
-                            
-                            <!--<img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_memory.jpg"?>" class="card-img-top image-carte-custom" alt="image memory">
+                     <?php if( $article_project->have_posts() ) : while( $article_project->have_posts() ) : $article_project->the_post();?>
+                        <div class="col-6 col-sm-4 col-md-3">
+                            <div class="card card-custom"> 
+                                <?php $présence_image = get_post_thumbnail_id($article_project->ID);?>
+                                <?php if ($présence_image == 0 ){?> 
+                                    <img src="<?php echo bloginfo('template_directory')."/images/image_project_de_base.jpeg"?>" >
+                                <?php } else { 
+                                    $image = wp_get_attachment_image_src(get_post_thumbnail_id($article_project->ID));?>
+                                    <img src="<?php echo $image[0] ?>" >
+                                    <?php /*if( (strpos($image[0],".png") == true) || (strpos($image[0],".jpg") == true) ){*/?>
+                                <?php } ?>
+                                <h5><?php echo  $article_project->post->post_title ?></h5>
+                                <?php if ( $article_project->post->post_excerpt == ""){?>
+                                    <p class="d-flex justify-content-center"><?php $messageDefault = "[Veuillez renseigner un extrait de l'article]";?></p>
+                                    <?php echo $messageDefault;
+                                }?>
+                                <p><?php echo $article_project->post->post_excerpt ?></p>
+                                            
+                                <?php  if ($article_project->post->post_content ==""){ ?>
+                                    <a onclick="" class="btn  btn_perso red mt-3">L'article est vide</a>
+                                <?php }else{?>
+                                    <a href="<?php echo $article_project->post->guid ?>" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                    <?php $lienGit = $article_project->post->post_title;
+                                    $lienGit = str_replace(" ","-",$lienGit);
+                                    $lienGit = str_replace(":","",$lienGit);
+                                    $lienGit = str_replace("--","-",$lienGit);?>
+                                    <a href="https://github.com/Floconi/<?php echo $lienGit ?>" target="_blank" rel="noreferrer"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <?php } ?>  
+                            </div>
+                        </div>        
+                    <?php  endwhile; endif; ?> 
+                    <?php /**
+                     * * J'ai volontairement laisser le contenu si jamais je devais m'en reservir
+                     */ ?>
+                    <!-- <div class="col-6 col-md-4">
+                        <div class="card card-custom">
+                            <img src="<?php // echo bloginfo('template_directory')."/images/images_de_base/image_carte_memory.jpg"?>" class="card-img-top image-carte-custom" alt="image memory">
                             <div class="card-body">
-                            <h5 class="card-title">Project memory</h5>
-                            <p class="card-text">faire un jeu de memory où  le but est de trouver toutes les paires</p>
-                            <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                            <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <h5 class="card-title">Project memory</h5>
+                                <p class="card-text">faire un jeu de memory où  le but est de trouver toutes les paires</p>
+                                <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -234,10 +229,10 @@
                         <div class="card card-custom">
                             <img src="<?php echo bloginfo('template_directory')."/images/image_convertiseur.png"?>" class="card-img-top" alt="image convertiseur">
                             <div class="card-body">
-                            <h5 class="card-title">Project convertisseur</h5>
-                            <p class="card-text">Programme qui converti  une somme d'euros en franc ou inversement</p>
-                            <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                            <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <h5 class="card-title">Project convertisseur</h5>
+                                <p class="card-text">Programme qui converti  une somme d'euros en franc ou inversement</p>
+                                <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -245,10 +240,10 @@
                         <div class="card card-custom">
                             <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_morpion.png"?>" class="card-img-top" alt="image morpion">
                             <div class="card-body">
-                            <h5 class="card-title">Project morpion</h5>
-                            <p class="card-text">Le but du jeu  est d'aligner 3 symbole dans n'importe quel sens</p>
-                            <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                            <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <h5 class="card-title">Project morpion</h5>
+                                <p class="card-text">Le but du jeu  est d'aligner 3 symbole dans n'importe quel sens</p>
+                                <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -256,10 +251,10 @@
                         <div class="card card-custom">
                             <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_carte_style_.png"?>" class="card-img-top" alt="image style guide">
                             <div class="card-body">
-                            <h5 class="card-title">style sous figma</h5>
-                            <p class="card-text">Un style guide d'un cv pour une futur intégration</p>
-                            <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                            <a onclick="alertdev()" ><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <h5 class="card-title">style sous figma</h5>
+                                <p class="card-text">Un style guide d'un cv pour une futur intégration</p>
+                                <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                <a onclick="alertdev()" ><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -267,10 +262,10 @@
                         <div class="card card-custom">
                             <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_couverture_biographie.png"?>" class="card-img-top" alt="image one page">
                             <div class="card-body">
-                            <h5 class="card-title">One Page Biographie</h5>
-                            <p class="card-text">Création d'une biographie de l'auteur Victor Hugo</p>
-                            <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                            <a href="https://github.com/Floconi/biographie_victor_hugo/tree/dev" target="_blank" rel="no-referrer"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <h5 class="card-title">One Page Biographie</h5>
+                                <p class="card-text">Création d'une biographie de l'auteur Victor Hugo</p>
+                                <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                <a href="https://github.com/Floconi/biographie_victor_hugo/tree/dev" target="_blank" rel="no-referrer"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
                             </div>
                         </div>
                     </div>
@@ -278,10 +273,10 @@
                         <div class="card card-custom">
                             <img src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_card_scratch.png"?>" class="card-img-top" alt="image Scratch">
                             <div class="card-body">
-                            <h5 class="card-title">Projet Scratch</h5>
-                            <p class="card-text">Petite histoire de Noël sous scratch ( stop motion)</p>
-                            <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
-                            <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
+                                <h5 class="card-title">Projet Scratch</h5>
+                                <p class="card-text">Petite histoire de Noël sous scratch ( stop motion)</p>
+                                <a onclick="alertdev()" class="btn btn-primary btn_perso mt-3">Découvrir le projet</a>
+                                <a onclick="alertdev()"><i class="bi bi-github d-flex justify-content-end pt-3"></i></a>
                             </div>
                         </div>
                     </div>-->
@@ -326,8 +321,7 @@
                         <div class="col-3 d-md-none">
                         </div>
                     </div>
-                </div>
-                
+                </div>   
             </div>
         </section>
     </main>

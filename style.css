@@ -105,11 +105,14 @@ Version: 1.0
 .menu_deroulant .page_active{
     color: #FBB734;
 }
+.page_active{
+    color: #FBB734;
+}
 
 
 
 .header_hero{
-    background-image: url(../portfolio-kilian-wp/images/images_de_base/fond_header.png);
+    /*background-image: url(../portfolio-kilian-wp/images/images_de_base/fond_header.png);*/
     background-repeat: no-repeat;
     background-size: cover;
     height: 100vh;
@@ -188,7 +191,7 @@ p{
     background-image: url();
 }
 .main{
-    background-image: url(../portfolio-kilian-wp/images/images_de_base/fond_main_.png);
+    /*background-image: url(../portfolio-kilian-wp/images/images_de_base/fond_main_.png);*/
     background-repeat: no-repeat;
     background-size: cover;
 }   
@@ -225,7 +228,7 @@ p{
 /** Partie citation */
 
 .citation{
-    background-image: url(../portfolio-kilian-wp/images/images_de_base/image_fond_citation.jpg);
+    /*background-image: url(../portfolio-kilian-wp/images/images_de_base/image_fond_citation.jpg);*/
     background-size: cover;
     background-position-y:bottom ;
 }
@@ -362,6 +365,11 @@ p{
 .longeur_refuse{
     color : red;
 }
+.form-control:disabled{
+    background-color: #64D3EB;
+    opacity: 0.5;
+    border-color: #258C93;
+}
 
 .message_caractere_minimum{
     font-family: "monda";
@@ -395,6 +403,7 @@ p{
 .input_etat_initial-custom{
     z-index: 2;
 }
+
 
 /* Tout les message erreur sont affecter */
 .error{
@@ -467,6 +476,9 @@ p{
 .formulaire .infoplus p{
     color: #FBB734;
 }
+.bouton_form_custom p{
+    display: flex;
+}
 
 
   /**
@@ -480,7 +492,7 @@ p{
     margin-top: 0 !important;
     padding-top: 50px;
 }
-.description_custom{
+.profil p{
    text-align: justify;
    color: #fff;
 }
@@ -564,6 +576,12 @@ p{
 }
 .hobies__intituler{
     font-weight: bolder;
+}
+.hobies p{
+    font-weight: bolder;
+}
+a{
+    text-decoration: none;
 }
 
 

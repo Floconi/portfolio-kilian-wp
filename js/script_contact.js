@@ -540,13 +540,25 @@ var erreur_minimum = false
     
     /* Cette partie est importente ! Elle définie le nombre d'erreur restante et surtout elle 
     indique à l'utilisateur si son formulaire à été valider ou non */
-
+    var btn_verifier_information = document.getElementById("btn_contact")
+    var btn_envoyer = document.getElementById("btn_envoyer")
+    var btn_modifier = document.getElementById("btn_modifier")
     if ( nomb_erreur == 0){
-        erreurgenerale.innerHTML = "Votre demande a bien été enregistrée avec succès :)"
+        saisie_imposible(champ_nom)
+        saisie_imposible(champ_prenom)
+        saisie_imposible(champ_email)
+        saisie_imposible(champ_telephone)
+        saisie_imposible(champ_message)
+
+        erreurgenerale.innerHTML = "Votre demande est parfaitement complété.<br> Pour l'envoyer merci de cliquer sur le bouton envoyer. <br> Si vous souhaiter modifier des informations cliquer sur modifier"
         erreurgenerale.classList.add("alert")
         erreurgenerale.classList.remove("alert-danger")
-        erreurgenerale.classList.add("alert-success")
+        erreurgenerale.classList.add("alert-warning")
         erreurgenerale.style.display = "block"
+        btn_modifier.classList.replace("d-none","d-block")
+        btn_envoyer.classList.replace("d-none","d-block")
+        btn_verifier_information.classList.replace("d-block","d-none")
+        
     }else{
         erreurgenerale.innerHTML = "Il reste "+nomb_erreur+" erreur(s) dans le formulaire, <br> Merci de les corriger avant de re-envoyer votre message"
         erreurgenerale.classList.add("alert")
@@ -554,6 +566,143 @@ var erreur_minimum = false
         erreurgenerale.style.display = "block"
     }
 }
+function modifier_formulaire() {
+    var champ_nom = document.querySelector("#champ_nom")
+    var champ_prenom  = document.querySelector("#champ_prenom")
+    var champ_email = document.querySelector("#champ_email")
+    var champ_telephone = document.querySelector("#champ_telephone")
+    var champ_message = document.querySelector("#champ_message")
+    var btn_verifier_information = document.getElementById("btn_contact")
+    var btn_envoyer = document.getElementById("btn_envoyer")
+    var btn_modifier = document.getElementById("btn_modifier")
+    var erreurgenerale = document.querySelector(".erreur-generale")
+
+    erreurgenerale.style.display = "none"
+
+    btn_modifier.classList.replace("d-block","d-none")
+    btn_envoyer.classList.replace("d-block","d-none")
+    btn_verifier_information.classList.replace("d-none","d-block")
+    
+    saisie_possible(champ_nom)
+    saisie_possible(champ_prenom)
+    saisie_possible(champ_email)
+    saisie_possible(champ_telephone)
+    saisie_possible(champ_message)
+
+}
+
+function envoyer(){
+    var erreurgenerale = document.querySelector(".erreur-generale")
+    var zone_nom_et_prenom= document.getElementById("zone_nom_et_prenom")
+    var zone_email_et_telephone= document.getElementById("zone_email_et_telephone")
+    var zone_message = document.getElementById("zone_message")
+    var btn_envoyer = document.getElementById("btn_envoyer")
+    var btn_modifier = document.getElementById("btn_modifier")
+    var btn_nouvelle_demande = document.getElementById("btn_nouvelle_demande")
+
+    erreurgenerale.innerHTML = "Votre demande a bien  été envoyer :). <br> Vous receverez une réponse par l'e-mail indiquer dans le formulaire <br> Bonne journée !"
+    erreurgenerale.classList.replace("alert-warning", "alert-success")
+    zone_nom_et_prenom.classList.add("d-block")
+    zone_email_et_telephone.classList.add("d-block")
+    zone_message.classList.add("d-block")
+    zone_nom_et_prenom.classList.replace("d-block","d-none")
+    zone_email_et_telephone.classList.replace("d-block","d-none")
+    zone_message.classList.replace("d-block","d-none")
+    btn_modifier.classList.replace("d-block","d-none")
+    btn_envoyer.classList.replace("d-block","d-none")
+    btn_nouvelle_demande.classList.replace("d-none","d-block")
+
+   
+
+}
+function nouvelle_demande(){
+    var erreurgenerale = document.querySelector(".erreur-generale")
+    var zone_nom_et_prenom= document.getElementById("zone_nom_et_prenom")
+    var zone_email_et_telephone= document.getElementById("zone_email_et_telephone")
+    var zone_message = document.getElementById("zone_message")
+    var btn_nouvelle_demande = document.getElementById("btn_nouvelle_demande")
+    var btn_verifier_information = document.getElementById("btn_contact")
+
+    var champ_nom = document.querySelector("#champ_nom")
+    var champ_prenom  = document.querySelector("#champ_prenom")
+    var champ_email = document.querySelector("#champ_email")
+    var champ_telephone = document.querySelector("#champ_telephone")
+    var champ_message = document.querySelector("#champ_message")
+
+    
+    var erreur_champ_nom = document.querySelector(".nom-error")
+    var erreur_champ_prenom  = document.querySelector(".prenom-error")
+    var erreur_champ_email = document.querySelector(".email-error")
+    var erreur_champ_telephone = document.querySelector(".tel-error")
+    var erreur_champ_message = document.querySelector(".message-error")
+
+
+    erreurgenerale.classList.remove("alert-success")
+    erreurgenerale.style.display = "none"
+    zone_nom_et_prenom.classList.replace("d-none","d-flex")
+    zone_email_et_telephone.classList.replace("d-none","d-flex")
+    zone_message.classList.replace("d-none","d-block")
+    btn_nouvelle_demande.classList.replace("d-block","d-none")
+    btn_verifier_information.classList.replace("d-none","d-block")
+
+    effacer_saisie(champ_nom)
+    effacer_saisie(champ_prenom)
+    effacer_saisie(champ_email)
+    effacer_saisie(champ_telephone)
+    effacer_saisie(champ_message)
+
+    saisie_possible(champ_nom)
+    saisie_possible(champ_prenom)
+    saisie_possible(champ_email)
+    saisie_possible(champ_telephone)
+    saisie_possible(champ_message)
+
+    gestion_label_onchange('nom')
+    gestion_label_onchange('prenom')
+    gestion_label_onchange('email')
+    gestion_label_onchange('telephone')
+    gestion_label_onchange('message')
+
+    elever_nomb_caractere('nom')
+    elever_nomb_caractere('prenom')
+    elever_nomb_caractere('email')
+    elever_nomb_caractere('telephone')
+    elever_nomb_caractere('message')
+
+
+    effacerErreur(erreur_champ_nom)
+    effacerErreur(erreur_champ_prenom)
+    effacerErreur(erreur_champ_email)
+    effacerErreur(erreur_champ_message)
+    effacerErreur(erreur_champ_telephone)
+
+}
+
+function Nom_page_actuelle(nom){
+    var nom_Page_actuelle
+    nom_Page_actuelle = nom
+
+}
+function effacer_saisie(champ){
+    champ.value=""
+}
+
+function saisie_possible(champ){
+    console.log("heyyyyyyy")
+    champ.disabled = false
+}
+
+
+
+
+
+function saisie_imposible(champ){
+    champ.disabled = true
+
+}
+
+
+
 
 /**
  **Fonction qui efface toutes les erreurs

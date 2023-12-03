@@ -78,9 +78,13 @@
 
     <body>
 
+            <?php  $titre_actuel = get_the_title() ; 
+            $type_de_publication_actuelle = get_post_type();
+            $id_page_actuel = get_the_id();
+            ?>
 
     
-        <section class="header_hero" > <!-- Obliger car l'arrière plan doit être sur le header et le héro-->
+        <section class="header_hero"  style="background-image: url(<?php echo bloginfo('template_directory')."/images/images_de_base/Fond_header.png)"?>"> <!-- Obliger car l'arrière plan doit être sur le header et le héro-->
             <header class="header">
                 <div class="container d-flex justify-content-between">
                     <div class="row ">
@@ -102,26 +106,105 @@
                                     </li>
                                 </ul> 
                                 <div class="menu_cacher d-none"> <nav id="site-navigation" class="main-navigation">
-                                    <?php
-                                    wp_nav_menu(
-                                        array(
-                                            'theme_location' => 'main-menu',
-                                            'menu_id'     => 'primary-menu',
-                                        )
-                                    );
+                                        <?php
+
+                                        $requete_menu_nav = array(
+                                            'post_type' => 'page',
+                                            'order' => 'ASC'
+                                            
+                                        );
+                                        $menu_nav = new WP_Query($requete_menu_nav);?>
+                                        <ul> 
+                                        <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
+                                                <li> 
+                                                    <?php if ($menu_nav->post->post_title == $titre_actuel ){ ?>
+                                                        <a class="page_active" href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                    <?php }else{ ?>
+                                                        <a href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                    <?php } ?>
+                                                    
+                                                </li>
+                                    
+                                        <?php endwhile; endif; ?>
+                                        </ul>
+
+                                        <?php
+
+
+
+                                        /**
+                                         * ! Partie obligatoire pour retrouver la page actuelle sinon la méthode the_title récupère le titre de la derniere page à cause de la méthode juste au dessus 
+                                         */
+                                        $requete_menu_nav = array(
+                                            'post_type' => 'page',
+                                            'page_id' => $id_page_actuel,
+                                            
+                                        );
+                                        $menu_nav = new WP_Query($requete_menu_nav);?>
+                                        
+                                        <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
+                                        <?php endwhile; endif; ?>
+                                
+                                    
+                                    <?php /** 
+                                    *wp_nav_menu(
+                                    *    array(
+                                    *        'theme_location' => 'main-menu',
+                                    *        'menu_id'     => 'primary-menu',
+                                     *   )
+                                    *);*/
                                     ?>
                                 </nav> </div> 
                             </nav>
                             <nav class="nav d-none d-sm-block">
-                                 <nav id="site-navigation" class="main-navigation">
-                                    <?php
-                                    wp_nav_menu(
-                                        array(
-                                            'theme_location' => 'main-menu',
-                                            'menu_id'     => 'primary-menu',
-                                        )
-                                    );
-                                    ?>
+                                <nav id="site-navigation" class="main-navigation">
+                                        <?php
+
+                                        $requete_menu_nav = array(
+                                            'post_type' => 'page',
+                                            'order' => 'ASC'
+                                            
+                                        );
+                                        $menu_nav = new WP_Query($requete_menu_nav);?>
+                                        <ul> 
+                                        <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
+                                                <li> 
+                                                    <?php if ($menu_nav->post->post_title == $titre_actuel ){ ?>
+                                                        <a class="page_active" href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                    <?php }else{ ?>
+                                                        <a href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                    <?php } ?>
+                                                    
+                                                </li>
+                                    
+                                        <?php endwhile; endif; ?>
+                                        </ul>
+
+                                        <?php
+
+
+
+                                        /**
+                                         * ! Partie obligatoire pour retrouver la page actuelle sinon la méthode the_title récupère le titre de la derniere page à cause de la méthode juste au dessus 
+                                         */
+                                        $requete_menu_nav = array(
+                                            'post_type' => 'page',
+                                            'page_id' => $id_page_actuel,
+                                            
+                                        );
+                                        $menu_nav = new WP_Query($requete_menu_nav);?>
+                                        
+                                        <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
+                                        <?php endwhile; endif; ?>
+                                    
+                                    <?php/** 
+                                    ** wp_nav_menu(
+                                        * array(
+                                          *  'theme_location' = 'main-menu',
+                                         *   'menu_id'     = 'primary-menu',
+                                       * )
+                                    *);
+                                    */?>
                                 </nav> 
                                 <!--<ul> 
                                     <li>
@@ -145,19 +228,20 @@
                     <div class="row ">
                         <div class="col-12 d-flex flex-column justify-content-center text-center  align-items-center content-hero-custom">
                             <h1> <?php 
-                            $titre = get_the_title();
-                            $post_type = get_post_type();
+                            //$titre = get_the_title();
+                            //$post_type = get_post_type();
 
-                            if ($titre == "Accueil"){
+                            if ( $titre_actuel == "Accueil"){
                                 echo "bienvenue_";
                             }else{
-                                if ( $post_type == "post"){
-                                    echo "Article : ".$titre."_";
+                                if ( $type_de_publication_actuelle == "post"){
+                                    echo "Article : ".$titre_actuel."_";
                                 }else{
                                    echo $titre."_";  
                                 }
                                
                             } 
+
                             ?>
                                 <br>
                                 <span>
