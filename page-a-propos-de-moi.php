@@ -2,11 +2,15 @@
     <?php get_header() ?>
     <main class="main" style="background-image: url(<?php echo bloginfo('template_directory')."/images/images_de_base/fond_main_.png)"?>">
         <section class="profil main_section" id="profil">
-            <div class="container">
+            <div class="container"> 
+                <?php $categorieDescription_profil = array(
+                    'category_name' => 'Mon profil', 
+                ); 
+                $Description_profil = new WP_Query( $categorieDescription_profil );?>
                 <div class="row">
                     <div class="col-3"></div>
                     <div class="col-6 ">
-                        <h2 class=" p-4 titre_h2">Mon profil_</h2>
+                        <h2 class=" p-4 titre_h2"><?php echo $Description_profil->query["category_name"]."_" ; ?></h2>
                     </div>
                     <div class="col-3"></div>
                 </div>
@@ -19,10 +23,7 @@
                             <!-- Je passe à la ligne pour + de lisibilité-->
                             <?php /*$descriptionprofil = get_page_by_title('Profil','','post');
                                 echo $descriptionprofil->post_content? */ ?>
-                             <?php $categorieDescription_profil = array(
-                                'category_name' => 'Description_profil', 
-                            ); 
-                            $Description_profil = new WP_Query( $categorieDescription_profil );?>
+                            
                             <?php echo $Description_profil->post->post_content?>
                              <!--Après un bac scientifique (option culture numérique) et un DUT Génie Thermique et énergie, 
                             je souhaite aujourd'hui me réorienter vers le domaine de l'informatique pour lequel j'ai toujours eu ungrand intérêt.
@@ -62,17 +63,9 @@
 
 
         <section class="competences main_section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-3"></div>
-                    <div class="col-6">
-                        <h2 class=" p-4 titre_h2">Mes competences de developpeur_</h2>
-                    </div>
-                    <div class="col-3"></div>
-                </div>
-                <div class="row competences_contenu_custom pt-4 pb-4">
-                    <?php // 1. On définit les arguments pour définir ce que l'on souhaite récupérer
-                            $categorieCompetences = array(
+            <div class="container">   
+                <?php // 1. On définit les arguments pour définir ce que l'on souhaite récupérer
+                $categorieCompetences = array(
                                 'category_name' => 'Compétences', 
                                 'orderby' => 'date',
                                 'order' => 'ASC',
@@ -81,10 +74,19 @@
                             );
 
                             // 2. On exécute la WP Query
-                            $article_compétences = new WP_Query( $categorieCompetences );
+                            $article_compétences = new WP_Query( $categorieCompetences ); ?>
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <h2 class=" p-4 titre_h2"><?php echo $Description_profil->query["category_name"]."_" ; ?></h2>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+                <div class="row competences_contenu_custom pt-4 pb-4">
+                 
+                            
 
-                            // 3. On lance la boucle !
-                            if( $article_compétences->have_posts() ) : while( $article_compétences->have_posts() ) : $article_compétences->the_post();?>
+                            <?php if( $article_compétences->have_posts() ) : while( $article_compétences->have_posts() ) : $article_compétences->the_post();?>
                             <div class="col-12 col-sm-6 col-md-4">
                         <div class="competences_zone_titre ">
                             <h3 class="titre_h3 "> <?php echo $article_compétences->post->post_title ?></h3>
@@ -399,12 +401,16 @@
             </div>
         </section>-->
         
-        <section class="exp_pro_et_hobies d-flex flex-column flex-md-row main_section" >
+        <section class="exp_pro_et_hobies d-flex flex-column flex-md-row main_section align justify-content-center align-content-center" >
             <section class="exp_pro main_section">
                 <div class="container">
+                        <?php $categorie_exp_pro = array(
+                                'category_name' => 'Experiences_pro', 
+                            ); 
+                            $Description_exp_pro = new WP_Query( $categorie_exp_pro );?>
                     <div class="row">
                         <div class="col-12 col-md-12 ">
-                            <h2 class="titre_h2 p-4">Mes experiences <br> professionnelles_</h2>
+                            <h2 class="titre_h2 p-4"><?php echo $Description_exp_pro->post->post_title ?></h2>
                         </div>
                     </div>
                     <div class="row row-custom">
@@ -412,10 +418,7 @@
                             <?php/** 
                              * $ex_pro = get_page_by_title('Mes expériences professionnelles','','post');
                              * $ex_pro-post_content */?>
-                             <?php $categorie_exp_pro = array(
-                                'category_name' => 'Experiences_pro', 
-                            ); 
-                            $Description_exp_pro = new WP_Query( $categorie_exp_pro );?>
+                             
                             <?php echo $Description_exp_pro->post->post_content?>
                             <!--<p class="exp_pro__intituler">Stage de découverte de conseiller informatique </p>
                             <ul>

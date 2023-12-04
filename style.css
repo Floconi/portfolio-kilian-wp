@@ -108,6 +108,16 @@ Version: 1.0
 .page_active{
     color: #FBB734;
 }
+.img_404{
+    width: 100vw;
+    height: 100vh;
+}
+.btn_404{
+    position: absolute;
+    left : 66vw;
+    top : 60vh;
+    height: 100px;
+}
 
 
 
@@ -274,6 +284,7 @@ p{
     color: #ACFF6B;
 }
 
+
 .project .card-custom{
     background-color: #20584B;
     min-height: 300px;
@@ -380,6 +391,40 @@ p{
     font-size: 15px;
 }
 /* Position des labels */
+.vers_label_haut{
+    animation-duration: 3s;
+    animation-name: label_haut;
+  }
+  
+  @keyframes label_haut {
+    from {
+        left: 0px;
+        top : 0px; 
+        
+    }
+  
+    to {
+        left : 40px;
+        bottom: 100px; 
+    }
+  }
+.vers_label_bas{
+    animation-duration: 3s;
+    animation-name: label_bas;
+  }
+  
+  @keyframes label_bas {
+    from {
+        left: 0px;
+        top : 0px; 
+        
+    }
+  
+    to {
+        left : 40px;
+      bottom: 100px; 
+    }
+  }
 .label_etat_initial-custom{
     position: relative;
     left : 10px;

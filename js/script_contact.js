@@ -1178,8 +1178,8 @@ function gestion_label_click(nom_du_champ) {
     var champ_cliquer = trouver_champ(nom_du_champ)
     var label_cliquer = trouver_label(nom_du_champ)
 
-   
     label_cliquer.classList.add("focus")
+    
     champ_cliquer.placeholder = "entrer votre "+nom_du_champ
 
 }

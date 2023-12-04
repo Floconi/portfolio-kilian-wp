@@ -19,11 +19,15 @@
 
     <main class = "main" style="background-image: url(<?php echo bloginfo('template_directory')."/images/images_de_base/fond_main_.png)"?>">
         <section class=" main_section about" id="about">
-            <div class="container">
+            <div class="container"> 
+                    <?php $categorieDescription_generale = array(
+                        'category_name' => 'Qui suis je ?', 
+                    ); 
+                    $Description_generale = new WP_Query( $categorieDescription_generale );?>
                 <div class="row">
                     <div class="col-3"></div>
                     <div class="col-6">
-                        <h2 class="p-4 titre_h2">Qui suis je ?_</h2>
+                        <h2 class="p-4 titre_h2"><?php echo $Description_generale->query["category_name"]."_" ; ?></h2>
                     </div>
                     <div class="col-3"></div>
                 </div>
@@ -35,10 +39,7 @@
                     <div class="col-8 col-md-4">
                         <div class="description_generale d-flex flex-column">
                             <p>
-                            <?php $categorieDescription_generale = array(
-                                'category_name' => 'Description_générale', 
-                            ); 
-                            $Description_generale = new WP_Query( $categorieDescription_generale );?>
+                           
                                <?php // $descriptionAbout = get_page_by_title('Description','','post');?>
                                 <?php echo $Description_generale->post->post_content?>
                                 <!--Bonjour, Je suis Kilian montagnard dans l'ame, j' adore faire de la randonnée. 
@@ -46,7 +47,7 @@
                                 J'ai réaliser un titre développeur web et web mobile. Je serais ravie de vous aider à réaliser vos projects. 
                                 N'hésiter pas à consulter  mon parcours et à me dire ce que vous penser de ma page.-->
                             </p>
-                            <a href="http://localhost/wordpress/page-a-propos/" ><button class="btn btn-primary btn_perso mt-3" > Mon parcours</button></a>
+                            <a href="http://localhost/wordpress/a-propos-de-moi/" ><button class="btn btn-primary btn_perso mt-3" > Mon parcours</button></a>
                         </div> 
                         <div class="d-none d-md-block col-md-2"></div>   
                     </div>
@@ -55,7 +56,7 @@
         </section>
 
 
-        <section class=" citation main_section" style="background-image: url(<?php echo bloginfo('template_directory')."/images/images_de_base/image_fond_citation.png)"?>" >
+        <section class=" citation main_section" style="background-image: url(<?php echo bloginfo('template_directory')."/images/images_de_base/image_fond_citation.jpg)"?>" >
             <div class="row carousel-custom">
                 <div class="col-8">
                     <div id="carouselExampleIndicators" class="carousel slide">
@@ -135,7 +136,7 @@
                 <div class="row">
                     <div class="col-3 col-md-0"></div>
                     <div class="col-6  ">
-                        <h2 class=" titre_h2 p-4"> <?php echo $article_project->query["category_name"] ; ?></h2>
+                        <h2 class=" titre_h2 p-4"> <?php echo $article_project->query["category_name"]."_" ; ?></h2>
                     </div>
                     <div class="col-3 col-md-0"></div>
                 </div>
@@ -316,6 +317,7 @@
                         <div class="col-3 d-md-none">
                         </div>
                         <div class="col-6 d-flex justify-content-center">
+                            
                             <a href= "http://localhost/wordpress/contact/" ><button class="btn btn-primary btn_perso align-items-center" > <i class="bi bi-envelope-at"></i> Me contacter</button></a>
                         </div>
                         <div class="col-3 d-md-none">
