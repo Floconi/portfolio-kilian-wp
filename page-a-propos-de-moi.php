@@ -400,11 +400,49 @@
                 </div>
             </div>
         </section>-->
+
+
+
+        <section class="section_cv main_section">
+        <?php $categorie_CV = array(
+                'category_name' => 'Section Cv',
+                'order' => 'ASC'
+            ); 
+            $Contenu_CV= new WP_Query( $categorie_CV );?>
+            <div class="container">
+                <div class="row row_custom ">
+            <?php
+             if( $Contenu_CV->have_posts() ) : while( $Contenu_CV->have_posts() ) : $Contenu_CV->the_post();?>
+                  
+                
+                   
+                        <div class="col-12 col-md-6 d-flex justify-content-center flex-column">
+                            <h2 class="titre_h2 p-4"><?php echo $Contenu_CV->post->post_title."_" ?></h2>
+                            <div class=" content-custom ">
+                                <?php echo $Contenu_CV->post->post_content?>
+                               <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($Contenu_CV->post->ID));?>
+                               <?php $présence_image = get_post_thumbnail_id($article_project->ID);?>
+                                <?php if ($présence_image == 0 ){?> 
+                                    <img class="image_fin_carte" src="<?php echo bloginfo('template_directory')."/images/image_project_de_base.jpeg"?>" >
+                                <?php } else { 
+                                    $image = wp_get_attachment_image_src(get_post_thumbnail_id($Contenu_CV->post->ID));?>
+                                    <img class="image_fin_carte" src="<?php echo $image[0] ?>" >
+                                    <?php } ?>
+                            </div>
+                        </div>
+                   
+               
+
+             <?php endwhile; endif;?> 
+            </div>
+        </div>
+    
+        </section>
         
-        <section class="exp_pro_et_hobies d-flex flex-column flex-md-row main_section align justify-content-center align-content-center" >
+        <!--<section class="exp_pro_et_hobies d-flex flex-column flex-md-row main_section align justify-content-center align-content-center" >
             <section class="exp_pro main_section">
                 <div class="container">
-                        <?php $categorie_exp_pro = array(
+                        <?php /**$categorie_exp_pro = array(
                                 'category_name' => 'Experiences_pro', 
                             ); 
                             $Description_exp_pro = new WP_Query( $categorie_exp_pro );?>
@@ -419,8 +457,8 @@
                              * $ex_pro = get_page_by_title('Mes expériences professionnelles','','post');
                              * $ex_pro-post_content */?>
                              
-                            <?php echo $Description_exp_pro->post->post_content?>
-                            <!--<p class="exp_pro__intituler">Stage de découverte de conseiller informatique </p>
+                            <?php //echo $Description_exp_pro->post->post_content?>
+                            <p class="exp_pro__intituler">Stage de découverte de conseiller informatique </p>
                             <ul>
                                 <li class="rouge">Juin 2023 Pôle numérique Gourdon </li>
                                 <li>Accueille des clients, les conseiller, répondre à leur interrogation concernant des problèmes liés à l'informatique. </li>
@@ -439,8 +477,8 @@
                             <ul>
                                 <li class="rouge">De juillet 2018 à août 2021 </li>
                                 <li>Comité d'entreprise Sncf Centres de vacances pour enfants (Samoëns, Argentière, Belle-lle, Nevers). Service, ménage, blanchisserie et aide cuisine.</li>
-                            </ul>-->
-                            <img class="image_fin_carte" src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_travail.jpg"?>" alt="image de travail">
+                            </ul>
+                            <img class="image_fin_carte" src="<?php// echo bloginfo('template_directory')."/images/images_de_base/image_travail.jpg"?>" alt="image de travail">
                         </div>
 
                     </div>
@@ -461,12 +499,12 @@
                              *  $centreinteret = get_page_by_title('Centres d\'intérêt','','post'); 
                              * echo $centreinteret-post_content?
                              * */ ?> 
-                             <?php $categorie_hobies = array(
+                             <?php/* $categorie_hobies = array(
                                 'category_name' => 'Centre d\'intérêt', 
                             ); 
-                            $Description_hobies = new WP_Query( $categorie_hobies );?>
-                            <?php echo $Description_hobies->post->post_content?>
-                            <!--<p class="hobies__intituler">Jeux de logique </p>
+                            $Description_hobies = new WP_Query( $categorie_hobies );*/?>
+                            <?php //echo $Description_hobies->post->post_content?>
+                            <p class="hobies__intituler">Jeux de logique </p>
                             <ul>
                                 <li>Jeu d'échec à titre personnel </li>
                             </ul>
@@ -483,7 +521,7 @@
                             <p class="hobies__intituler">Nature </p>
                             <ul>
                                 <li>Randonnée</li>
-                            </ul>-->
+                            </ul>
                             <img class="image_fin_carte " src="<?php echo bloginfo('template_directory')."/images/images_de_base/image_course_d_orientation.jpg"?>" alt="image de travail">
                         </div>
 
@@ -491,7 +529,7 @@
                 </div>
                 
             </section>
-        </section>
+        </section>-->
         
     </main>
    

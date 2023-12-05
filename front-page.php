@@ -317,8 +317,12 @@
                         <div class="col-3 d-md-none">
                         </div>
                         <div class="col-6 d-flex justify-content-center">
-                            
-                            <a href= "http://localhost/wordpress/contact/" ><button class="btn btn-primary btn_perso align-items-center" > <i class="bi bi-envelope-at"></i> Me contacter</button></a>
+                        <?php $cat_page_contact = array(
+                                'post_type' => 'page',
+                                'page_id' => '10',           
+                            );
+                             $Page_contact = new WP_Query($cat_page_contact);?>
+                            <a href= "<?php echo $Page_contact->posts[0]->guid ?>" ><button class="btn btn-primary btn_perso align-items-center" > <i class="bi bi-envelope-at"></i> Me contacter</button></a>
                         </div>
                         <div class="col-3 d-md-none">
                         </div>

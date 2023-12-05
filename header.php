@@ -197,14 +197,14 @@
                                         <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
                                         <?php endwhile; endif; ?>
                                     
-                                    <?php/** 
+                                    <?php /** 
                                     ** wp_nav_menu(
                                         * array(
                                           *  'theme_location' = 'main-menu',
                                          *   'menu_id'     = 'primary-menu',
                                        * )
                                     *);
-                                    */?>
+                                    */ ?>
                                 </nav> 
                                 <!--<ul> 
                                     <li>
