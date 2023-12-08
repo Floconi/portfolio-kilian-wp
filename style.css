@@ -432,7 +432,7 @@ p{
     bottom: -37px;
     z-index : 1;
     font-family: "nico_mojiregular"; 
-    transform: 10px , 37px 350ms ease-in-out;
+    transition :  10px , 37px 350ms ease-in-out;
     color : #fff;
 }
 

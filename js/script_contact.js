@@ -1206,7 +1206,6 @@ function gestion_label_onchange(nom_du_champ) {
  */
 
 function afficher_nomb_caractere(nom_du_champ){
-    console.log("afficher nomb carac")
     var champ_cliquer = trouver_champ(nom_du_champ)
     var champ_cliquer_nomb_carac = trouver_champ_nomb_carac(nom_du_champ)
     var nomb_carac_max = trouver__nomb_carac_max(nom_du_champ)

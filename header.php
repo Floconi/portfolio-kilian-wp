@@ -81,6 +81,27 @@
             <?php  $titre_actuel = get_the_title() ; 
             $type_de_publication_actuelle = get_post_type();
             $id_page_actuel = get_the_id();
+            $lien_de_la_page_actuelle = get_the_permalink();
+            $tab_lien = explode("/",$lien_de_la_page_actuelle,);
+            $nombreDeCaseTabLien = count($tab_lien);
+            $nom_de_domaine ="";
+            $sortiboucle = false;
+            $i = -1;
+            while ($sortiboucle == false){
+                $i= $i + 1;
+                if ($tab_lien[$i] == "wordpress"){
+                    $nom_de_domaine =  $nom_de_domaine.$tab_lien[$i]."/";
+                    $sortiboucle = true ;
+                }else{
+                    if ($nom_de_domaine.$tab_lien[$i] == ""){
+                        $nom_de_domaine =  $nom_de_domaine."/"; 
+                    }else {
+                        $nom_de_domaine =  $nom_de_domaine.$tab_lien[$i]."/"; 
+                    }
+                }
+                
+            }
+            
             ?>
 
     
@@ -106,54 +127,47 @@
                                     </li>
                                 </ul> 
                                 <div class="menu_cacher d-none"> <nav id="site-navigation" class="main-navigation">
-                                        <?php
+                                <?php
 
-                                        $requete_menu_nav = array(
-                                            'post_type' => 'page',
-                                            'order' => 'ASC'
-                                            
-                                        );
-                                        $menu_nav = new WP_Query($requete_menu_nav);?>
-                                        <ul> 
-                                        <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
-                                                <li> 
-                                                    <?php if ($menu_nav->post->post_title == $titre_actuel ){ ?>
-                                                        <a class="page_active" href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
-                                                    <?php }else{ ?>
-                                                        <a href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
-                                                    <?php } ?>
-                                                    
-                                                </li>
-                                    
-                                        <?php endwhile; endif; ?>
-                                        </ul>
-
-                                        <?php
-
-
-
-                                        /**
-                                         * ! Partie obligatoire pour retrouver la page actuelle sinon la méthode the_title récupère le titre de la derniere page à cause de la méthode juste au dessus 
-                                         */
-                                        $requete_menu_nav = array(
-                                            'post_type' => 'page',
-                                            'page_id' => $id_page_actuel,
-                                            
-                                        );
-                                        $menu_nav = new WP_Query($requete_menu_nav);?>
+                                    $requete_menu_nav = array(
+                                        'post_type' => 'page',
+                                        'order' => 'ASC'
                                         
-                                        <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
-                                        <?php endwhile; endif; ?>
-                                
-                                    
-                                    <?php /** 
-                                    *wp_nav_menu(
-                                    *    array(
-                                    *        'theme_location' => 'main-menu',
-                                    *        'menu_id'     => 'primary-menu',
-                                     *   )
-                                    *);*/
-                                    ?>
+                                    );
+                                    $menu_nav = new WP_Query($requete_menu_nav);?>
+                                    <ul> 
+                                    <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
+                                            <li>  
+                                                <?php $lien_page = $menu_nav->post->post_title;
+                                                $lien_page_titre = str_replace(" ","-",$lien_page); ?>
+                                                <?php if ($menu_nav->post->post_title == $titre_actuel ){ ?>
+                                                    <a class="page_active" href="<?php echo $nom_de_domaine.$lien_page_titre ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                <?php }else{ ?>
+                                                    <a href="<?php echo $nom_de_domaine.$lien_page_titre ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                <?php } ?>
+                                                
+                                            </li>
+
+                                    <?php endwhile; endif; ?>
+                                    </ul>
+
+                                    <?php
+
+
+
+                                    /**
+                                     * ! Partie obligatoire pour retrouver la page actuelle sinon la méthode the_title récupère le titre de la derniere page à cause de la méthode juste au dessus 
+                                     */
+                                    $requete_menu_nav = array(
+                                        'post_type' => 'page',
+                                        'page_id' => $id_page_actuel,
+                                        
+                                    );
+                                    $menu_nav = new WP_Query($requete_menu_nav);?>
+
+                                    <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
+                                    <?php endwhile; endif; ?>
+
                                 </nav> </div> 
                             </nav>
                             <nav class="nav d-none d-sm-block">
@@ -168,11 +182,13 @@
                                         $menu_nav = new WP_Query($requete_menu_nav);?>
                                         <ul> 
                                         <?php if( $menu_nav->have_posts() ) : while( $menu_nav->have_posts() ) : $menu_nav->the_post(); ?>
-                                                <li> 
+                                                <li>  
+                                                    <?php $lien_page = $menu_nav->post->post_title;
+                                                    $lien_page_titre = str_replace(" ","-",$lien_page); ?>
                                                     <?php if ($menu_nav->post->post_title == $titre_actuel ){ ?>
-                                                        <a class="page_active" href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                        <a class="page_active" href="<?php echo $nom_de_domaine.$lien_page_titre ?>"><?php echo $menu_nav->post->post_title; ?></a>
                                                     <?php }else{ ?>
-                                                        <a href="<?php echo $menu_nav->post->guid ?>"><?php echo $menu_nav->post->post_title; ?></a>
+                                                        <a href="<?php echo $nom_de_domaine.$lien_page_titre ?>"><?php echo $menu_nav->post->post_title; ?></a>
                                                     <?php } ?>
                                                     
                                                 </li>
@@ -198,7 +214,7 @@
                                         <?php endwhile; endif; ?>
                                     
                                     <?php /** 
-                                    ** wp_nav_menu(
+                                    * wp_nav_menu(
                                         * array(
                                           *  'theme_location' = 'main-menu',
                                          *   'menu_id'     = 'primary-menu',

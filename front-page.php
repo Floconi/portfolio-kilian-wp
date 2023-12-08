@@ -47,7 +47,26 @@
                                 J'ai réaliser un titre développeur web et web mobile. Je serais ravie de vous aider à réaliser vos projects. 
                                 N'hésiter pas à consulter  mon parcours et à me dire ce que vous penser de ma page.-->
                             </p>
-                            <a href="http://localhost/wordpress/a-propos-de-moi/" ><button class="btn btn-primary btn_perso mt-3" > Mon parcours</button></a>
+                            <?php $lien_de_la_page_actuelle = get_the_permalink();
+                                $tab_lien = explode("/",$lien_de_la_page_actuelle,);
+                                $nombreDeCaseTabLien = count($tab_lien);
+                                $nom_de_domaine ="";
+                                $sortiboucle = false;
+                                $i = -1;
+                                while ($sortiboucle == false){
+                                    $i= $i + 1;
+                                    if ($tab_lien[$i] == "wordpress"){
+                                        $nom_de_domaine =  $nom_de_domaine.$tab_lien[$i]."/";
+                                        $sortiboucle = true ;
+                                    }else{
+                                        if ($nom_de_domaine.$tab_lien[$i] == ""){
+                                            $nom_de_domaine =  $nom_de_domaine."/"; 
+                                        }else {
+                                            $nom_de_domaine =  $nom_de_domaine.$tab_lien[$i]."/"; 
+                                        }
+                                    }
+                            } ?>
+                            <a href="<?php echo $nom_de_domaine."a-propos-de-moi/" ?>"><button class="btn btn-primary btn_perso mt-3" > Mon parcours</button></a>
                         </div> 
                         <div class="d-none d-md-block col-md-2"></div>   
                     </div>
@@ -322,7 +341,7 @@
                                 'page_id' => '10',           
                             );
                              $Page_contact = new WP_Query($cat_page_contact);?>
-                            <a href= "<?php echo $Page_contact->posts[0]->guid ?>" ><button class="btn btn-primary btn_perso align-items-center" > <i class="bi bi-envelope-at"></i> Me contacter</button></a>
+                            <a href= "<?php echo  $nom_de_domaine."/contact" ?>" ><button class="btn btn-primary btn_perso align-items-center" > <i class="bi bi-envelope-at"></i> Me contacter</button></a>
                         </div>
                         <div class="col-3 d-md-none">
                         </div>
